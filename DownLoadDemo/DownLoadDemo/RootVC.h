@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RootVC.h
 //  DownLoadDemo
 //
 //  Created by 李林凯 on 16/9/21.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface RootVC : UIViewController
 
 @end
-
