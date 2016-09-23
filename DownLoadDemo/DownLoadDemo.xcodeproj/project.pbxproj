@@ -13,10 +13,10 @@
 		A684385D1D92C6FB003E3EB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A684385C1D92C6FB003E3EB0 /* Assets.xcassets */; };
 		A68438601D92C6FB003E3EB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A684385E1D92C6FB003E3EB0 /* LaunchScreen.storyboard */; };
 		A68B28DC1D92C9C700EA3067 /* RootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A68B28DB1D92C9C700EA3067 /* RootVC.m */; };
-		A691DFF21D937DB80027D36B /* WMYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A691DFF11D937DB80027D36B /* WMYDownloadManager.m */; };
-		A691DFF51D9380170027D36B /* WMYDownOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A691DFF41D9380170027D36B /* WMYDownOperation.m */; };
-		A691DFF81D93839E0027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A691DFF71D93839E0027D36B /* NSFileManager+WMYDownLoadFileConfig.m */; };
-		A691DFFB1D93C90C0027D36B /* WMYDownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A691DFFA1D93C90C0027D36B /* WMYDownModel.m */; };
+		A691DFFE1D9510760027D36B /* WMYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A691DFFD1D9510760027D36B /* WMYDownloadManager.m */; };
+		A691E0011D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A691E0001D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m */; };
+		A691E0041D952D700027D36B /* WMYDownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A691E0031D952D700027D36B /* WMYDownModel.m */; };
+		A691E0071D952D9E0027D36B /* WMYDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A691E0061D952D9E0027D36B /* WMYDownloadRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,14 +30,14 @@
 		A68438611D92C6FB003E3EB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A68B28DA1D92C9C700EA3067 /* RootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootVC.h; sourceTree = "<group>"; };
 		A68B28DB1D92C9C700EA3067 /* RootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootVC.m; sourceTree = "<group>"; };
-		A691DFF01D937DB80027D36B /* WMYDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMYDownloadManager.h; sourceTree = "<group>"; };
-		A691DFF11D937DB80027D36B /* WMYDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownloadManager.m; sourceTree = "<group>"; };
-		A691DFF31D9380170027D36B /* WMYDownOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMYDownOperation.h; sourceTree = "<group>"; };
-		A691DFF41D9380170027D36B /* WMYDownOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownOperation.m; sourceTree = "<group>"; };
-		A691DFF61D93839E0027D36B /* NSFileManager+WMYDownLoadFileConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+WMYDownLoadFileConfig.h"; sourceTree = "<group>"; };
-		A691DFF71D93839E0027D36B /* NSFileManager+WMYDownLoadFileConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+WMYDownLoadFileConfig.m"; sourceTree = "<group>"; };
-		A691DFF91D93C90C0027D36B /* WMYDownModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMYDownModel.h; sourceTree = "<group>"; };
-		A691DFFA1D93C90C0027D36B /* WMYDownModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownModel.m; sourceTree = "<group>"; };
+		A691DFFC1D9510760027D36B /* WMYDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMYDownloadManager.h; sourceTree = "<group>"; };
+		A691DFFD1D9510760027D36B /* WMYDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownloadManager.m; sourceTree = "<group>"; };
+		A691DFFF1D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+WMYDownLoadFileConfig.h"; sourceTree = "<group>"; };
+		A691E0001D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+WMYDownLoadFileConfig.m"; sourceTree = "<group>"; };
+		A691E0021D952D700027D36B /* WMYDownModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMYDownModel.h; sourceTree = "<group>"; };
+		A691E0031D952D700027D36B /* WMYDownModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownModel.m; sourceTree = "<group>"; };
+		A691E0051D952D9E0027D36B /* WMYDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMYDownloadRequest.h; sourceTree = "<group>"; };
+		A691E0061D952D9E0027D36B /* WMYDownloadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownloadRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,14 +95,14 @@
 		A691DFEF1D937D6C0027D36B /* Down */ = {
 			isa = PBXGroup;
 			children = (
-				A691DFF01D937DB80027D36B /* WMYDownloadManager.h */,
-				A691DFF11D937DB80027D36B /* WMYDownloadManager.m */,
-				A691DFF31D9380170027D36B /* WMYDownOperation.h */,
-				A691DFF41D9380170027D36B /* WMYDownOperation.m */,
-				A691DFF61D93839E0027D36B /* NSFileManager+WMYDownLoadFileConfig.h */,
-				A691DFF71D93839E0027D36B /* NSFileManager+WMYDownLoadFileConfig.m */,
-				A691DFF91D93C90C0027D36B /* WMYDownModel.h */,
-				A691DFFA1D93C90C0027D36B /* WMYDownModel.m */,
+				A691DFFF1D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.h */,
+				A691E0001D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m */,
+				A691DFFC1D9510760027D36B /* WMYDownloadManager.h */,
+				A691DFFD1D9510760027D36B /* WMYDownloadManager.m */,
+				A691E0051D952D9E0027D36B /* WMYDownloadRequest.h */,
+				A691E0061D952D9E0027D36B /* WMYDownloadRequest.m */,
+				A691E0021D952D700027D36B /* WMYDownModel.h */,
+				A691E0031D952D700027D36B /* WMYDownModel.m */,
 			);
 			path = Down;
 			sourceTree = "<group>";
@@ -180,12 +180,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A68B28DC1D92C9C700EA3067 /* RootVC.m in Sources */,
+				A691E0071D952D9E0027D36B /* WMYDownloadRequest.m in Sources */,
 				A68438551D92C6FB003E3EB0 /* AppDelegate.m in Sources */,
-				A691DFF81D93839E0027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */,
 				A68438521D92C6FB003E3EB0 /* main.m in Sources */,
-				A691DFFB1D93C90C0027D36B /* WMYDownModel.m in Sources */,
-				A691DFF51D9380170027D36B /* WMYDownOperation.m in Sources */,
-				A691DFF21D937DB80027D36B /* WMYDownloadManager.m in Sources */,
+				A691DFFE1D9510760027D36B /* WMYDownloadManager.m in Sources */,
+				A691E0011D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */,
+				A691E0041D952D700027D36B /* WMYDownModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

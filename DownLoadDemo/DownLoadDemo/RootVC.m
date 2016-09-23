@@ -7,8 +7,7 @@
 //
 
 #import "RootVC.h"
-#import "WMYDownloadManager.h"
-#import "WMYDownOperation.h"
+#import "WMYDownloadRequest.h"
 #import "WMYDownModel.h"
 
 @interface RootVC ()
@@ -61,20 +60,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    WMYDownloadManager *dm = [WMYDownloadManager sharedInstance];
-    
+//    WMYDownloadManager *dm = [WMYDownloadManager sharedInstance];
+//    
     WMYDownModel *model = [self.downUrlArray objectAtIndex:indexPath.row];
-    [dm downLoadFileWithWithWMYDownModel:model];
+    [WMYDownloadRequest startDownload:model.downUrl];
+  
 }
 
 - (IBAction)downButtonAction:(UIButton *)sender {
-    WMYDownloadManager *dm = [WMYDownloadManager sharedInstance];
-    NSLog(@"下载url ====== %@", dm.downQueue.operations);
+   
 }
 
 - (IBAction)zantingbuttonAction:(UIButton *)sender {
-    WMYDownloadManager *dm = [WMYDownloadManager sharedInstance];
-    WMYDownOperation *op = dm.downQueue.operations[0];
+    
 }
 
 - (void)didReceiveMemoryWarning {
