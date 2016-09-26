@@ -22,6 +22,7 @@
 #pragma mark -- 文件名格式化（因为是用url做文件名有//会创建文件失败所以Md5一下）
 + (NSString *)WMYfileNamemd5StringWith:(NSString *)urlString;
 
-
+#pragma mark -- 本地文件大小
++ (NSInteger)WMYfileLengthWithUrl:(NSString *)urlString;
 
 @end

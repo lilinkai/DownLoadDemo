@@ -9,6 +9,7 @@
 #import "RootVC.h"
 #import "WMYDownloadRequest.h"
 #import "WMYDownModel.h"
+#import "ListVC.h"
 
 @interface RootVC ()
 
@@ -20,8 +21,17 @@
 
 @implementation RootVC
 
+- (void)clicklist{
+    UIStoryboard *listSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ListVC *listvc = [listSB instantiateViewControllerWithIdentifier:@"ListVC"];
+    [self.navigationController pushViewController:listvc animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+ 
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clicklist)];
+    self.navigationItem.rightBarButtonItem = item;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -36,7 +46,6 @@
     model2.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTOOLBOXMURDER2.mp4";
     model2.videoName = @"南瓜电影";
     [self.downUrlArray addObject:model2];
-
     
     [self.contentTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     // Do any additional setup after loading the view.
@@ -55,16 +64,19 @@
     WMYDownModel *model = [self.downUrlArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = model.videoName;
-    
+  
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    WMYDownloadManager *dm = [WMYDownloadManager sharedInstance];
-//    
+//
     WMYDownModel *model = [self.downUrlArray objectAtIndex:indexPath.row];
-    [WMYDownloadRequest startDownload:model.downUrl];
-  
+    [WMYDownloadRequest startDownload:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
+        
+    } downloadStateBlock:^(WMYDownloadState state) {
+        
+    }];
 }
 
 - (IBAction)downButtonAction:(UIButton *)sender {

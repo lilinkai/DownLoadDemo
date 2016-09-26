@@ -63,4 +63,14 @@
     return [NSString stringWithString:mutableString];
 }
 
+#pragma mark -- 本地文件大小
++ (NSInteger)WMYfileLengthWithUrl:(NSString *)urlString{
+    
+    return [[[NSFileManager defaultManager] attributesOfItemAtPath:[NSFileManager WMYFilePathWithFileName:urlString] error:nil][NSFileSize] integerValue];
+
+}
+
+
+
+
 @end

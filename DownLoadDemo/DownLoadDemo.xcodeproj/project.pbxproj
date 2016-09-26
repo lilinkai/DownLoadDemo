@@ -17,6 +17,8 @@
 		A691E0011D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A691E0001D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m */; };
 		A691E0041D952D700027D36B /* WMYDownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A691E0031D952D700027D36B /* WMYDownModel.m */; };
 		A691E0071D952D9E0027D36B /* WMYDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A691E0061D952D9E0027D36B /* WMYDownloadRequest.m */; };
+		A6B845841D98C018007CFF0E /* ListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B845831D98C018007CFF0E /* ListVC.m */; };
+		A6B8458B1D990FFE007CFF0E /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B8458A1D990FFE007CFF0E /* ListCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,10 @@
 		A691E0031D952D700027D36B /* WMYDownModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownModel.m; sourceTree = "<group>"; };
 		A691E0051D952D9E0027D36B /* WMYDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMYDownloadRequest.h; sourceTree = "<group>"; };
 		A691E0061D952D9E0027D36B /* WMYDownloadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMYDownloadRequest.m; sourceTree = "<group>"; };
+		A6B845821D98C018007CFF0E /* ListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListVC.h; sourceTree = "<group>"; };
+		A6B845831D98C018007CFF0E /* ListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListVC.m; sourceTree = "<group>"; };
+		A6B845891D990FFE007CFF0E /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCell.h; sourceTree = "<group>"; };
+		A6B8458A1D990FFE007CFF0E /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +81,10 @@
 				A68438541D92C6FB003E3EB0 /* AppDelegate.m */,
 				A68B28DA1D92C9C700EA3067 /* RootVC.h */,
 				A68B28DB1D92C9C700EA3067 /* RootVC.m */,
+				A6B845821D98C018007CFF0E /* ListVC.h */,
+				A6B845831D98C018007CFF0E /* ListVC.m */,
+				A6B845891D990FFE007CFF0E /* ListCell.h */,
+				A6B8458A1D990FFE007CFF0E /* ListCell.m */,
 				A68438591D92C6FB003E3EB0 /* Main.storyboard */,
 				A684385C1D92C6FB003E3EB0 /* Assets.xcassets */,
 				A684385E1D92C6FB003E3EB0 /* LaunchScreen.storyboard */,
@@ -179,12 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6B845841D98C018007CFF0E /* ListVC.m in Sources */,
 				A68B28DC1D92C9C700EA3067 /* RootVC.m in Sources */,
 				A691E0071D952D9E0027D36B /* WMYDownloadRequest.m in Sources */,
 				A68438551D92C6FB003E3EB0 /* AppDelegate.m in Sources */,
 				A68438521D92C6FB003E3EB0 /* main.m in Sources */,
 				A691DFFE1D9510760027D36B /* WMYDownloadManager.m in Sources */,
 				A691E0011D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */,
+				A6B8458B1D990FFE007CFF0E /* ListCell.m in Sources */,
 				A691E0041D952D700027D36B /* WMYDownModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

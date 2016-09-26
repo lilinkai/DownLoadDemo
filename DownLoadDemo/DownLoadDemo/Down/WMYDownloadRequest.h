@@ -8,11 +8,33 @@
 
 #import <Foundation/Foundation.h>
 #import "WMYDownModel.h"
+#import "NSFileManager+WMYDownLoadFileConfig.h"
+
+typedef enum {
+    WMYStateStart = 0,     ///下载中
+    WMYStateSuspended,     ///暂停中
+    WMYStateCompleted,     ///完成
+    WMYStateFailed         ///失败
+}WMYDownloadState;
+
+typedef void(^progressBlock)(NSString *receivedSize, NSString * expectedSize,float progress, NSString *speed);    //下载进度回调
+
+typedef void(^downloadStateBlock)(WMYDownloadState state);  //下载状态
 
 @interface WMYDownloadRequest : NSObject
 
 /**
- 下载链接
+ 文件流
+ */
+@property (nonatomic, strong) NSOutputStream *stream;
+
+/**
+ 数据的总长度
+ */
+@property (nonatomic, assign) NSInteger totalLength;
+@property (nonatomic, copy) NSString *totalLengthString;
+/**
+ 下载model
  */
 @property (strong, nonatomic) WMYDownModel *downModel;
 
@@ -20,6 +42,18 @@
 
 @property (nonatomic) NSURLSessionDataTask *task;               //下载任务对象
 
-+ (void)startDownload:(WMYDownModel *)downModel;
+@property (nonatomic, assign)NSUInteger growth; //当前网速
+
+/**
+ 下载进度
+ */
+@property (nonatomic, copy) progressBlock progressBlock;
+
+/**
+ 下载状态
+ */
+@property (nonatomic, copy) downloadStateBlock downloadStateBlock;
+
++ (void)startDownload:(WMYDownModel *)downModel progressBlock:(progressBlock)progressBlock downloadStateBlock:(downloadStateBlock)downloadStateBlock;
 
 @end

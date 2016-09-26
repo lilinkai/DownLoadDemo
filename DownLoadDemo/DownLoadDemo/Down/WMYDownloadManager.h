@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WMYDownloadRequest.h"
 
-@class WMYDownloadRequest;
-
-@class WMYDownModel;
 
 @interface WMYDownloadManager : NSObject
+
+/**
+ 所有的下载任务
+ */
+@property (strong, nonatomic) NSMutableArray *downTasks;
 
 #pragma mark 下载队列管理单例对象
 + (instancetype)sharedInstance;

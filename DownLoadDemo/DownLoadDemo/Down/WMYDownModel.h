@@ -11,11 +11,6 @@
 @interface WMYDownModel : NSObject
 
 /**
- 文件流
- */
-@property (nonatomic, strong) NSOutputStream *stream;
-
-/**
  文件下载地址
  */
 @property (nonatomic, copy) NSString *downUrl;
