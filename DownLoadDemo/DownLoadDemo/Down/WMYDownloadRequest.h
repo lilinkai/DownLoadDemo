@@ -23,6 +23,8 @@ typedef void(^downloadStateBlock)(WMYDownloadState state);  //下载状态
 
 @interface WMYDownloadRequest : NSObject
 
+@property (nonatomic, strong)NSTimer *timer;
+
 /**
  文件流
  */

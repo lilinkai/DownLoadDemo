@@ -41,7 +41,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u1n-M3-MFa" id="mhZ-SE-LnI">
-                                            <frame key="frameInset" width="375" height="98"/>
+                                            <frame key="frameInset" width="375" height="98.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -89,10 +89,10 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hqn-Ux-lI7" id="f14-8K-AAd">
-                                            <frame key="frameInset" width="375" height="94"/>
+                                            <frame key="frameInset" width="375" height="94.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资源名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fR-02-Kai">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="资源名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fR-02-Kai">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -112,6 +112,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在请求" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M9-nO-TgY">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="IPs-qI-wNa" secondAttribute="bottom" constant="9" id="042-DC-k3F"/>
@@ -124,12 +129,15 @@
                                                 <constraint firstItem="IPs-qI-wNa" firstAttribute="top" secondItem="6fR-02-Kai" secondAttribute="bottom" constant="18" id="gHu-RM-fPR"/>
                                                 <constraint firstItem="IPs-qI-wNa" firstAttribute="top" secondItem="StY-6W-ieO" secondAttribute="bottom" constant="18" id="pW8-Vm-EoR"/>
                                                 <constraint firstItem="6fR-02-Kai" firstAttribute="leading" secondItem="f14-8K-AAd" secondAttribute="leading" constant="19" id="rgX-Gd-znW"/>
+                                                <constraint firstAttribute="bottom" secondItem="5M9-nO-TgY" secondAttribute="bottom" constant="7.5" id="tgN-2A-TRp"/>
                                                 <constraint firstAttribute="bottom" secondItem="xZg-eO-8Df" secondAttribute="bottom" constant="8" id="uFX-Me-7hp"/>
                                                 <constraint firstAttribute="trailing" secondItem="6fR-02-Kai" secondAttribute="trailing" constant="19" id="uOc-Eo-1JF"/>
+                                                <constraint firstItem="5M9-nO-TgY" firstAttribute="centerX" secondItem="f14-8K-AAd" secondAttribute="centerX" id="zZb-tc-LUZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="progressLabel" destination="StY-6W-ieO" id="GCW-F4-noK"/>
+                                            <outlet property="stateLabel" destination="5M9-nO-TgY" id="CC1-mT-tbg"/>
                                             <outlet property="sudu" destination="IPs-qI-wNa" id="kO3-bR-uhf"/>
                                             <outlet property="totallength" destination="xZg-eO-8Df" id="L1O-jB-HVw"/>
                                             <outlet property="videoName" destination="6fR-02-Kai" id="nmU-42-s2b"/>

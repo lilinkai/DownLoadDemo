@@ -12,7 +12,6 @@
 @interface WMYDownloadRequest ()
 {
     NSUInteger       _lastSize;
-    NSTimer         *_timer;
 }
 
 @property (strong,nonatomic) WMYDownloadManager *downloadManager;
@@ -52,11 +51,8 @@
         [request configDownRequest];
         request.progressBlock = progressBlock;
         request.downloadStateBlock = downloadStateBlock;
-        [request.downloadManager startRequestTask:request];
-    }else{
-        request.progressBlock = progressBlock;
-        request.downloadStateBlock = downloadStateBlock;
     }
+    [request.downloadManager startRequestTask:request];
 }
 
 @end

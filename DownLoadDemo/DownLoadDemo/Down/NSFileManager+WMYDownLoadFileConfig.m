@@ -30,7 +30,6 @@
  @return 文件的存放路径生成
  */
 + (NSString *)WMYFilePathWithFileName:(NSString *)fileName{
-    NSLog(@"缓存目录========%@", [[NSFileManager WMYCachesDirectory] stringByAppendingPathComponent:fileName]);
     return [[NSFileManager WMYCachesDirectory] stringByAppendingPathComponent:fileName];
 }
 
@@ -43,7 +42,9 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:[NSFileManager WMYCachesDirectory]]) {
         [fileManager createDirectoryAtPath:[NSFileManager WMYCachesDirectory] withIntermediateDirectories:YES attributes:nil error:NULL];
+        
     }
+    NSLog(@"缓存目录========%@", [NSFileManager WMYCachesDirectory]);
 }
 
 #pragma mark -- 文件名格式化（因为是用url做文件名有//会创建文件失败所以Md5一下）

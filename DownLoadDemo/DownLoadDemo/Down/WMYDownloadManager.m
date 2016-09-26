@@ -28,8 +28,6 @@
     dispatch_once(&onceToken, ^{
         manager = [[WMYDownloadManager alloc] init];
         [NSFileManager WMYCreateCacheDirectory];
-        
-        
     });
     return manager;
 }
@@ -48,24 +46,40 @@
 }
 
 - (void)startRequestTask:(WMYDownloadRequest *)request{
-    NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request.urlRequest];
-    request.task = task;
-    request.task.taskDescription = [NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl];
-    [self saveTaskRequst:request];
-}
 
-/**
- * 添加下载任务/恢复下载任务
- **/
-- (void)saveTaskRequst:(WMYDownloadRequest *)request
-{
+    if ([NSFileManager WMYfileLengthWithUrl:[NSFileManager WMYfileNamemd5StringWith:[NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl]]] == request.totalLength && [NSFileManager WMYfileLengthWithUrl:[NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl]] != 0) {
+        
+        NSLog(@"已经下载完成");
+        
+        [request.timer invalidate];
+        request.downloadStateBlock(WMYStateCompleted);
+        
+        return;
+    }
+    
     if ([self.downTasks containsObject:request]) {
         //已经存在此下载任务了
         NSLog(@"有这个下载了");
+        if (request.task.state == NSURLSessionTaskStateRunning) {
+            [request.task suspend];
+            request.downloadStateBlock(WMYStateSuspended);
+        }else{
+            [request.task resume];
+            request.downloadStateBlock(WMYStateStart);
+        }
     }else{
+        
+        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request.urlRequest];
+        request.task = task;
+        request.task.taskDescription = [NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl];
+        
+        // 设置请求头
+        NSString *range = [NSString stringWithFormat:@"bytes=%zd-", [NSFileManager WMYfileLengthWithUrl:[NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl]]];
+        [request.urlRequest setValue:range forHTTPHeaderField:@"Range"];
+        
         //未存在添加到下载队列数组中
         [self.downTasks addObject:request];
-    
+        
         //开始下载
         [request.task resume];
         

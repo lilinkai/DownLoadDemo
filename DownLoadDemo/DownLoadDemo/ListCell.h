@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *totallength;
 @property (weak, nonatomic) IBOutlet UILabel *sudu;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 
 @end

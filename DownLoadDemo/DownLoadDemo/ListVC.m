@@ -60,7 +60,11 @@
                               @"speed": speed,
                               @"indexPath": indexPath};
         
-        [weakSelf performSelectorOnMainThread:@selector(updateCellOnMainThread:) withObject:dic waitUntilDone:YES];
+         [weakSelf updateCellOnMainThread:dic];
+    };
+    
+    request.downloadStateBlock = ^(WMYDownloadState state) {
+       [weakSelf updateCellStateOnMainThread:@{@"state": [NSNumber numberWithInteger:state], @"indexPath": indexPath}];
     };
     
     cell.request = request;
@@ -68,16 +72,50 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+    WMYDownloadRequest *request = [_listArr objectAtIndex:indexPath.row];
+    WMYDownModel *model = request.downModel;
+    [WMYDownloadRequest startDownload:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
+        
+    } downloadStateBlock:^(WMYDownloadState state) {
+        NSLog(@"下载状态 ======== %d", state);
+    }];
+    
+}
+
 - (void)updateCellOnMainThread:(NSDictionary *)dic{
     
-    ListCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ListCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
+        
+        cell.totallength.text = [NSString stringWithFormat:@"%@/%@", [dic objectForKey:@"receivedSize"], [dic objectForKey:@"expectedSize"]];
+        
+        cell.sudu.text = [dic objectForKey:@"speed"];
+        
+        cell.progressLabel.text = [NSString stringWithFormat:@"%.1f%%", [[dic objectForKey:@"progress"] floatValue]*100.0];
+    });
+}
+
+- (void)updateCellStateOnMainThread:(NSDictionary *)dic{
     
-    cell.totallength.text = [NSString stringWithFormat:@"%@/%@", [dic objectForKey:@"receivedSize"], [dic objectForKey:@"expectedSize"]];
-    
-    cell.sudu.text = [dic objectForKey:@"speed"];
-    
-    cell.progressLabel.text = [NSString stringWithFormat:@"%.1f%%", [[dic objectForKey:@"progress"] floatValue]*100.0];
-    NSLog(@"建设大厦阿斯顿=======%@", dic);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ListCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
+        
+        switch ([[dic objectForKey:@"state"] integerValue]) {
+            case WMYStateStart:
+                cell.stateLabel.text = @"下载中";
+                break;
+            case WMYStateSuspended:
+                cell.stateLabel.text = @"暂停";
+                break;
+            case WMYStateCompleted:
+                cell.stateLabel.text = @"完成";
+                break;
+            default:
+                break;
+        }
+    });
 }
 
 /*
