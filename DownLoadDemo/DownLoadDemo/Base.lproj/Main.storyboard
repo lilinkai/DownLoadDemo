@@ -52,27 +52,11 @@
                                     <outlet property="delegate" destination="1wh-Q1-2lP" id="HyP-f4-GYg"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufx-rR-alZ">
-                                <frame key="frameInset" minX="25" minY="88" width="104" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="获取下载数量"/>
-                                <connections>
-                                    <action selector="downButtonAction:" destination="1wh-Q1-2lP" eventType="touchUpInside" id="P2C-TF-lzu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44u-z6-FzH">
-                                <frame key="frameInset" minX="241" minY="88" width="85" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="暂停下载"/>
-                                <connections>
-                                    <action selector="zantingbuttonAction:" destination="1wh-Q1-2lP" eventType="touchUpInside" id="6Qf-g5-9dC"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IjN-Gh-gZW" firstAttribute="top" secondItem="Bq7-c2-3VF" secondAttribute="bottom" id="HJb-VA-hbV"/>
-                            <constraint firstItem="Bq7-c2-3VF" firstAttribute="top" secondItem="KoM-QD-jNQ" secondAttribute="bottom" constant="100" id="Ups-lI-dnT"/>
+                            <constraint firstItem="Bq7-c2-3VF" firstAttribute="top" secondItem="KoM-QD-jNQ" secondAttribute="bottom" id="Ups-lI-dnT"/>
                             <constraint firstAttribute="trailing" secondItem="Bq7-c2-3VF" secondAttribute="trailing" id="cmm-uS-VE3"/>
                             <constraint firstItem="Bq7-c2-3VF" firstAttribute="leading" secondItem="z5d-VV-NAS" secondAttribute="leading" id="cxT-K4-uj8"/>
                         </constraints>
@@ -123,9 +107,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StY-6W-ieO">
-                                                    <frame key="frameInset" minX="281" minY="26" width="80" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StY-6W-ieO">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -137,7 +119,10 @@
                                                 <constraint firstItem="xZg-eO-8Df" firstAttribute="top" secondItem="6fR-02-Kai" secondAttribute="bottom" constant="19" id="2Js-0r-79S"/>
                                                 <constraint firstItem="xZg-eO-8Df" firstAttribute="leading" secondItem="f14-8K-AAd" secondAttribute="leading" constant="19" id="BH7-zC-hVg"/>
                                                 <constraint firstAttribute="trailing" secondItem="IPs-qI-wNa" secondAttribute="trailing" constant="19" id="Ifr-t8-ED4"/>
+                                                <constraint firstItem="StY-6W-ieO" firstAttribute="top" secondItem="f14-8K-AAd" secondAttribute="top" constant="26" id="T8H-yh-rvI"/>
+                                                <constraint firstAttribute="trailing" secondItem="StY-6W-ieO" secondAttribute="trailing" constant="14" id="dCV-OY-6fa"/>
                                                 <constraint firstItem="IPs-qI-wNa" firstAttribute="top" secondItem="6fR-02-Kai" secondAttribute="bottom" constant="18" id="gHu-RM-fPR"/>
+                                                <constraint firstItem="IPs-qI-wNa" firstAttribute="top" secondItem="StY-6W-ieO" secondAttribute="bottom" constant="18" id="pW8-Vm-EoR"/>
                                                 <constraint firstItem="6fR-02-Kai" firstAttribute="leading" secondItem="f14-8K-AAd" secondAttribute="leading" constant="19" id="rgX-Gd-znW"/>
                                                 <constraint firstAttribute="bottom" secondItem="xZg-eO-8Df" secondAttribute="bottom" constant="8" id="uFX-Me-7hp"/>
                                                 <constraint firstAttribute="trailing" secondItem="6fR-02-Kai" secondAttribute="trailing" constant="19" id="uOc-Eo-1JF"/>

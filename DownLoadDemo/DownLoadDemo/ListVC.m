@@ -76,7 +76,7 @@
     
     cell.sudu.text = [dic objectForKey:@"speed"];
     
-    cell.progressLabel.text = [NSString stringWithFormat:@"%.1f", [[dic objectForKey:@"progress"] floatValue]*100.0];
+    cell.progressLabel.text = [NSString stringWithFormat:@"%.1f%%", [[dic objectForKey:@"progress"] floatValue]*100.0];
     NSLog(@"建设大厦阿斯顿=======%@", dic);
 }
 
