@@ -71,7 +71,10 @@
 
 }
 
-
+#pragma mark -- 文件对应总长度列表
++ (NSString *)WMYTotalLengthFilepath{
+    return [[NSFileManager WMYCachesDirectory] stringByAppendingPathComponent:@"totalLength.plist"];
+}
 
 
 @end

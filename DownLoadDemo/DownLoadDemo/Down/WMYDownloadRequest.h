@@ -17,13 +17,21 @@ typedef enum {
     WMYStateFailed         ///失败
 }WMYDownloadState;
 
-typedef void(^progressBlock)(NSString *receivedSize, NSString * expectedSize,float progress, NSString *speed);    //下载进度回调
+typedef void(^progressBlock)(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed);
 
-typedef void(^downloadStateBlock)(WMYDownloadState state);  //下载状态
+typedef void(^stateBlock)(WMYDownloadState state);
 
 @interface WMYDownloadRequest : NSObject
 
+/**
+时间速率
+ */
 @property (nonatomic, strong)NSTimer *timer;
+
+/**
+ 当前网速
+ */
+@property (nonatomic, assign)NSUInteger growth;
 
 /**
  文件流
@@ -35,27 +43,37 @@ typedef void(^downloadStateBlock)(WMYDownloadState state);  //下载状态
  */
 @property (nonatomic, assign) NSInteger totalLength;
 @property (nonatomic, copy) NSString *totalLengthString;
+
 /**
  下载model
  */
 @property (strong, nonatomic) WMYDownModel *downModel;
 
+/**
+ 下载urlRequest配置
+ */
 @property (strong,nonatomic) NSMutableURLRequest *urlRequest;
 
-@property (nonatomic) NSURLSessionDataTask *task;               //下载任务对象
-
-@property (nonatomic, assign)NSUInteger growth; //当前网速
-
 /**
- 下载进度
+ 下载任务对象
  */
-@property (nonatomic, copy) progressBlock progressBlock;
+@property (nonatomic) NSURLSessionDataTask *task;
 
 /**
  下载状态
  */
-@property (nonatomic, copy) downloadStateBlock downloadStateBlock;
+@property (nonatomic, assign)WMYDownloadState downState;
 
-+ (void)startDownload:(WMYDownModel *)downModel progressBlock:(progressBlock)progressBlock downloadStateBlock:(downloadStateBlock)downloadStateBlock;
+/**
+ 下载进度回调
+ */
+@property (nonatomic, copy) progressBlock progressBlock;
+
+/**
+ 下载状态回调
+ */
+@property (nonatomic, copy) stateBlock stateBlock;
+
+- (void)configDownRequest;
 
 @end

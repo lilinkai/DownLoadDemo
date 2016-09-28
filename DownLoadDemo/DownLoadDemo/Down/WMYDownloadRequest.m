@@ -39,20 +39,4 @@
     _timer=[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(getGrowthSize) userInfo:nil repeats:YES];
 }
 
-/**
- * 实例化请求对象 已经存在则返回 不存在则创建一个并返回
- **/
-+ (void)startDownload:(WMYDownModel *)downModel progressBlock:(progressBlock)progressBlock downloadStateBlock:(downloadStateBlock)downloadStateBlock
-{
-    WMYDownloadRequest *request = [[WMYDownloadManager sharedInstance] getRequestForUrl:downModel.downUrl];
-    if (!request) {
-        request = [[WMYDownloadRequest alloc] init];
-        request.downModel = downModel;
-        [request configDownRequest];
-        request.progressBlock = progressBlock;
-        request.downloadStateBlock = downloadStateBlock;
-    }
-    [request.downloadManager startRequestTask:request];
-}
-
 @end

@@ -16,8 +16,9 @@
 {
     NSArray *_listArr;
 }
-@property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 
+@property (weak, nonatomic) IBOutlet UITableView *contentTableView;
+@property (nonatomic, strong) WMYDownloadManager *downloadManager;
 @end
 
 @implementation ListVC
@@ -30,6 +31,14 @@
     _listArr = [WMYDownloadManager sharedInstance].downTasks;
    
     // Do any additional setup after loading the view.
+}
+
+- (WMYDownloadManager *)downloadManager
+{
+    if (!_downloadManager) {
+        _downloadManager = [WMYDownloadManager sharedInstance];
+    }
+    return _downloadManager;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,19 +61,21 @@
     
     __weak typeof(&*self)weakSelf = self;
     
-    request.progressBlock = ^(NSString *receivedSize, NSString * expectedSize,float progress, NSString *speed){
-        
-        NSDictionary *dic = @{@"receivedSize": receivedSize,
+    request.progressBlock = ^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed){
+     
+        NSDictionary *dic = @{@"indexPath": indexPath,
+                              @"receivedSize": receivedSize,
                               @"expectedSize": expectedSize,
-                              @"progress": [NSNumber numberWithFloat:progress],
                               @"speed": speed,
-                              @"indexPath": indexPath};
+                              @"progress": [NSNumber numberWithFloat:progress]};
         
-         [weakSelf updateCellOnMainThread:dic];
+        [weakSelf updateCellOnMainThread:dic];
     };
     
-    request.downloadStateBlock = ^(WMYDownloadState state) {
-       [weakSelf updateCellStateOnMainThread:@{@"state": [NSNumber numberWithInteger:state], @"indexPath": indexPath}];
+    request.stateBlock = ^(WMYDownloadState state){
+        NSDictionary *dic = @{@"indexPath": indexPath,
+                              @"state": [NSNumber numberWithInteger:state]};
+        [weakSelf updateCellStateOnMainThread:dic];
     };
     
     cell.request = request;
@@ -75,11 +86,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     WMYDownloadRequest *request = [_listArr objectAtIndex:indexPath.row];
-    WMYDownModel *model = request.downModel;
-    [WMYDownloadRequest startDownload:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
+    [[WMYDownloadManager sharedInstance] download:request.downModel progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
         
-    } downloadStateBlock:^(WMYDownloadState state) {
-        NSLog(@"下载状态 ======== %d", state);
+    } stateBlock:^(WMYDownloadState state) {
+        
     }];
     
 }
@@ -94,11 +104,11 @@
         cell.sudu.text = [dic objectForKey:@"speed"];
         
         cell.progressLabel.text = [NSString stringWithFormat:@"%.1f%%", [[dic objectForKey:@"progress"] floatValue]*100.0];
+    
     });
 }
 
 - (void)updateCellStateOnMainThread:(NSDictionary *)dic{
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         ListCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
         
@@ -111,6 +121,8 @@
                 break;
             case WMYStateCompleted:
                 cell.stateLabel.text = @"完成";
+                _listArr = [WMYDownloadManager sharedInstance].downTasks;
+                [self.contentTableView reloadData];
                 break;
             default:
                 break;

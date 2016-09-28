@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "WMYDownloadRequest.h"
+#import "WMYDownModel.h"
 
+typedef void(^progressBlock)(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed);
+
+typedef void(^stateBlock)(WMYDownloadState state);
 
 @interface WMYDownloadManager : NSObject
 
@@ -17,12 +21,31 @@
  */
 @property (strong, nonatomic) NSMutableArray *downTasks;
 
-#pragma mark 下载队列管理单例对象
+/**
+ 下载队列管理单例对象
+
+ @return self
+ */
 + (instancetype)sharedInstance;
 
-#pragma mark 获取对应url下载任务
+
+/**
+ 获取对应url下载任务
+
+ @param url 下载url
+
+ @return 请求对象
+ */
 - (WMYDownloadRequest *)getRequestForUrl:(NSString *)url;
 
-- (void)startRequestTask:(WMYDownloadRequest *)request;
+
+/**
+ 开始下载
+
+ @param model           下载model
+ @param progressBlock 下载进度回调
+ @param stateBlock    下载状态回调
+ */
+- (void)download:(WMYDownModel *)model progressBlock:(progressBlock)progressBlock stateBlock:(stateBlock)stateBlock;
 
 @end

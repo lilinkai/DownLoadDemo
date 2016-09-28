@@ -7,7 +7,7 @@
 //
 
 #import "RootVC.h"
-#import "WMYDownloadRequest.h"
+#import "WMYDownloadManager.h"
 #import "WMYDownModel.h"
 #import "ListVC.h"
 
@@ -72,9 +72,9 @@
 //    WMYDownloadManager *dm = [WMYDownloadManager sharedInstance];
 //
     WMYDownModel *model = [self.downUrlArray objectAtIndex:indexPath.row];
-    [WMYDownloadRequest startDownload:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
+    [[WMYDownloadManager sharedInstance] download:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
         
-    } downloadStateBlock:^(WMYDownloadState state) {
+    } stateBlock:^(WMYDownloadState state) {
         
     }];
 }

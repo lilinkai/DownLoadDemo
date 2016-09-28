@@ -25,4 +25,7 @@
 #pragma mark -- 本地文件大小
 + (NSInteger)WMYfileLengthWithUrl:(NSString *)urlString;
 
+#pragma mark -- 文件对应总长度列表
++ (NSString *)WMYTotalLengthFilepath;
+
 @end

@@ -21,6 +21,20 @@
     _videoName.text = _request.downModel.videoName;
     
     _totallength.text = _request.totalLengthString;
+    
+    switch (request.downState) {
+        case WMYStateStart:
+            self.stateLabel.text = @"下载中";
+            break;
+        case WMYStateSuspended:
+            self.stateLabel.text = @"暂停";
+            break;
+        case WMYStateCompleted:
+            self.stateLabel.text = @"完成";
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
