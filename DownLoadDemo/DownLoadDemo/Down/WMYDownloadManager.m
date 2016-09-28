@@ -146,7 +146,7 @@
         //未存在添加到下载队列数组中
         [self.downTasks addObject:request];
         
-        if (self.downTasks.count >= downLoadCount) {
+        if (self.downTasks.count > downLoadCount) {
             //超出队列限制 暂停状态
             request.downState = WMYStateSuspended;
             request.stateBlock(WMYStateSuspended);
