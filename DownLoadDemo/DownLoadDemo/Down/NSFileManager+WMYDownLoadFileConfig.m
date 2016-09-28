@@ -30,7 +30,7 @@
  @return 文件的存放路径生成
  */
 + (NSString *)WMYFilePathWithFileName:(NSString *)fileName{
-    return [[NSFileManager WMYCachesDirectory] stringByAppendingPathComponent:fileName];
+    return [[NSFileManager WMYCachesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4", fileName]];
 }
 
 #pragma mark -- 创建缓存目录文件
