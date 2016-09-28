@@ -19,5 +19,17 @@
  电影名
  */
 @property (nonatomic, copy) NSString *videoName;
+/**
+ cid
+ */
+@property (nonatomic, copy) NSString *movieCid;
+/**
+ key
+ */
+@property (nonatomic, copy) NSString *movieKey;
+/**
+ 电影海报
+ */
+@property (nonatomic, copy) NSString *movieImgUrl;
 
 @end

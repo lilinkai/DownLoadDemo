@@ -10,6 +10,7 @@
 #import "WMYDownloadManager.h"
 #import "WMYDownloadRequest.h"
 #import "ListCell.h"
+#import "RootCell.h"
 
 @interface ListVC ()
 
@@ -55,7 +56,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListCell" forIndexPath:indexPath];
+    RootCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RootCell" forIndexPath:indexPath];
     
     WMYDownloadRequest *request = [_listArr objectAtIndex:indexPath.row];
     
@@ -78,8 +79,26 @@
         [weakSelf updateCellStateOnMainThread:dic];
     };
     
-    cell.request = request;
-
+    cell.downNameLabel.text = request.downModel.videoName;
+    
+    switch (request.downState) {
+        case WMYStateStart:
+            cell.downState.text = @"下载中";
+            break;
+        case WMYStateSuspended:
+            cell.downState.text = @"暂停";
+            break;
+        case WMYStateCompleted:
+            cell.downState.text = @"完成";
+            _listArr = [WMYDownloadManager sharedInstance].downTasks;
+            [self.contentTableView reloadData];
+            break;
+        default:
+            break;
+    }
+   
+    cell.progressView.progress = 0.0;
+    
     return cell;
 }
 
@@ -97,30 +116,30 @@
 - (void)updateCellOnMainThread:(NSDictionary *)dic{
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        ListCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
+        RootCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
         
-        cell.totallength.text = [NSString stringWithFormat:@"%@/%@", [dic objectForKey:@"receivedSize"], [dic objectForKey:@"expectedSize"]];
+        cell.downLengthLabel.text = [NSString stringWithFormat:@"%@/%@", [dic objectForKey:@"receivedSize"], [dic objectForKey:@"expectedSize"]];
         
-        cell.sudu.text = [dic objectForKey:@"speed"];
+        cell.seepLabel.text = [dic objectForKey:@"speed"];
         
-        cell.progressLabel.text = [NSString stringWithFormat:@"%.1f%%", [[dic objectForKey:@"progress"] floatValue]*100.0];
+        cell.progressView.progress = [[dic objectForKey:@"progress"] floatValue];
     
     });
 }
 
 - (void)updateCellStateOnMainThread:(NSDictionary *)dic{
     dispatch_async(dispatch_get_main_queue(), ^{
-        ListCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
+        RootCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
         
         switch ([[dic objectForKey:@"state"] integerValue]) {
             case WMYStateStart:
-                cell.stateLabel.text = @"下载中";
+                cell.downState.text = @"下载中";
                 break;
             case WMYStateSuspended:
-                cell.stateLabel.text = @"暂停";
+                cell.downState.text = @"暂停";
                 break;
             case WMYStateCompleted:
-                cell.stateLabel.text = @"完成";
+                cell.downState.text = @"完成";
                 _listArr = [WMYDownloadManager sharedInstance].downTasks;
                 [self.contentTableView reloadData];
                 break;

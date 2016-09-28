@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A616E9791D9BC56C00EF2317 /* login_startup.png in Resources */ = {isa = PBXBuildFile; fileRef = A616E9781D9BC56C00EF2317 /* login_startup.png */; };
+		A616E97C1D9BC9BC00EF2317 /* RootCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A616E97B1D9BC9BC00EF2317 /* RootCell.m */; };
 		A68438521D92C6FB003E3EB0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A68438511D92C6FB003E3EB0 /* main.m */; };
 		A68438551D92C6FB003E3EB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A68438541D92C6FB003E3EB0 /* AppDelegate.m */; };
 		A684385B1D92C6FB003E3EB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A68438591D92C6FB003E3EB0 /* Main.storyboard */; };
@@ -22,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A616E9781D9BC56C00EF2317 /* login_startup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_startup.png; sourceTree = "<group>"; };
+		A616E97A1D9BC9BC00EF2317 /* RootCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootCell.h; sourceTree = "<group>"; };
+		A616E97B1D9BC9BC00EF2317 /* RootCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootCell.m; sourceTree = "<group>"; };
 		A684384D1D92C6FB003E3EB0 /* DownLoadDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DownLoadDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A68438511D92C6FB003E3EB0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A68438531D92C6FB003E3EB0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +86,8 @@
 				A68438541D92C6FB003E3EB0 /* AppDelegate.m */,
 				A68B28DA1D92C9C700EA3067 /* RootVC.h */,
 				A68B28DB1D92C9C700EA3067 /* RootVC.m */,
+				A616E97A1D9BC9BC00EF2317 /* RootCell.h */,
+				A616E97B1D9BC9BC00EF2317 /* RootCell.m */,
 				A6B845821D98C018007CFF0E /* ListVC.h */,
 				A6B845831D98C018007CFF0E /* ListVC.m */,
 				A6B845891D990FFE007CFF0E /* ListCell.h */,
@@ -113,6 +120,7 @@
 				A691E0061D952D9E0027D36B /* WMYDownloadRequest.m */,
 				A691E0021D952D700027D36B /* WMYDownModel.h */,
 				A691E0031D952D700027D36B /* WMYDownModel.m */,
+				A616E9781D9BC56C00EF2317 /* login_startup.png */,
 			);
 			path = Down;
 			sourceTree = "<group>";
@@ -177,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A68438601D92C6FB003E3EB0 /* LaunchScreen.storyboard in Resources */,
+				A616E9791D9BC56C00EF2317 /* login_startup.png in Resources */,
 				A684385D1D92C6FB003E3EB0 /* Assets.xcassets in Resources */,
 				A684385B1D92C6FB003E3EB0 /* Main.storyboard in Resources */,
 			);
@@ -198,6 +207,7 @@
 				A691E0011D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */,
 				A6B8458B1D990FFE007CFF0E /* ListCell.m in Sources */,
 				A691E0041D952D700027D36B /* WMYDownModel.m in Sources */,
+				A616E97C1D9BC9BC00EF2317 /* RootCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

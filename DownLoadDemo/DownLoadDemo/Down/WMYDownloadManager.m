@@ -75,6 +75,23 @@
 }
 
 /**
+ * 计算缓存的占用存储大小
+ *
+ * @prama length  文件大小
+ */
+-(NSString *)convertSize:(NSUInteger)length
+{
+    if(length<1024)
+        return [NSString stringWithFormat:@"%ldB",(NSUInteger)length];
+    else if(length>=1024&&length<1024*1024)
+        return [NSString stringWithFormat:@"%.0fK",(float)length/1024];
+    else if(length >=1024*1024&&length<1024*1024*1024)
+        return [NSString stringWithFormat:@"%.1fM",(float)length/(1024*1024)];
+    else
+        return [NSString stringWithFormat:@"%.1fG",(float)length/(1024*1024*1024)];
+}
+
+/**
  开始下载
  
  @param model           下载model
@@ -254,21 +271,6 @@
     return _session;
 }
 
-/**
- * 计算缓存的占用存储大小
- *
- * @prama length  文件大小
- */
--(NSString *)convertSize:(NSUInteger)length
-{
-    if(length<1024)
-        return [NSString stringWithFormat:@"%ldB",(NSUInteger)length];
-    else if(length>=1024&&length<1024*1024)
-        return [NSString stringWithFormat:@"%.0fK",(float)length/1024];
-    else if(length >=1024*1024&&length<1024*1024*1024)
-        return [NSString stringWithFormat:@"%.1fM",(float)length/(1024*1024)];
-    else
-        return [NSString stringWithFormat:@"%.1fG",(float)length/(1024*1024*1024)];
-}
+
 
 @end

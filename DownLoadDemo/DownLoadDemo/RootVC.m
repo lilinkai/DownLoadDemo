@@ -10,6 +10,7 @@
 #import "WMYDownloadManager.h"
 #import "WMYDownModel.h"
 #import "ListVC.h"
+#import "RootCell.h"
 
 @interface RootVC ()
 
@@ -39,15 +40,20 @@
     
     WMYDownModel *model1 = [[WMYDownModel alloc]init];
     model1.downUrl = @"http://baobab.cdn.wandoujia.com/14468618701471.mp4";
-    model1.videoName = @"魔兽世界";
+    model1.videoName = @"魔兽世界预告片";
+    model1.movieCid = @"111111";
+    model1.movieKey = @"222222";
+    model1.movieImgUrl = @"uiimageUrl";
     [self.downUrlArray addObject:model1];
     
     WMYDownModel *model2 = [[WMYDownModel alloc]init];
     model2.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTOOLBOXMURDER2.mp4";
-    model2.videoName = @"南瓜电影";
+    model2.videoName = @"南瓜电影预告片";
+    model2.movieCid = @"222222";
+    model2.movieKey = @"333333";
+    model2.movieImgUrl = @"uiimageUrl";
     [self.downUrlArray addObject:model2];
-    
-    [self.contentTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+   
     // Do any additional setup after loading the view.
 }
 
@@ -59,6 +65,7 @@
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     
     WMYDownModel *model = [self.downUrlArray objectAtIndex:indexPath.row];
