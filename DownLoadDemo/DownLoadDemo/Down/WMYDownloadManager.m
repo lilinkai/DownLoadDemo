@@ -90,14 +90,9 @@
  */
 - (BOOL)isDownCompletion:(NSString *)url
 {
-    NSString *totalLengthPath = [NSFileManager WMYTotalLengthFilepath];
-    NSString *md5Url = [NSFileManager WMYfileNamemd5StringWith:url];
-    
-    NSLog(@"total ========== %ld", [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]);
-    
-    NSLog(@"length ========== %ld", [NSFileManager WMYfileLengthWithUrl:md5Url]);
-    
-    if ([[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue] && [NSFileManager WMYfileLengthWithUrl:md5Url] == [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]) {
+    NSInteger totalLengthPath = [[[NSFileManager WMYGetVideonModelWith:url] objectForKey:@"totalLength"] integerValue];
+ 
+    if (totalLengthPath && [NSFileManager WMYfileLengthWithUrl:url] == totalLengthPath) {
         return YES;
     }
     return NO;
@@ -130,6 +125,7 @@
 - (void)download:(WMYDownModel *)model progressBlock:(progressBlock)progressBlock stateBlock:(stateBlock)stateBlock{
     
     if ([self isDownCompletion:model.downUrl]) {
+        NSLog(@"下载完成了");
         return;
     }
     
@@ -177,7 +173,7 @@
         [request configDownRequest];
         
         // 设置请求头
-        NSString *range = [NSString stringWithFormat:@"bytes=%zd-", [NSFileManager WMYfileLengthWithUrl:[NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl]]];
+        NSString *range = [NSString stringWithFormat:@"bytes=%zd-", [NSFileManager WMYfileLengthWithUrl:request.downModel.downUrl]];
         
         NSLog(@"rangerange ===== %@", range);
         
@@ -213,6 +209,28 @@
     }
 }
 
+/**
+  删除对应的下载任务
+
+ @param url 下载url
+ */
+- (void)delDownLoadForUrl:(NSString *)url{
+    
+    WMYDownloadRequest *request = [self getRequestForUrl:url];
+    [request.task cancel];
+    
+    request.downState = WMYStateCancel;
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath: [NSFileManager WMYFilePathWithFileName:[NSFileManager WMYfileNamemd5StringWith:url]]
+]) {
+        // 删除沙盒中的资源
+        [fileManager removeItemAtPath:[NSFileManager WMYFilePathWithFileName:[NSFileManager WMYfileNamemd5StringWith:url]] error:nil];
+    }
+}
+
+
+
 #pragma mark 下载代理方法NSURLSessionDataDelegate
 /**
  * 接收到响应
@@ -230,15 +248,9 @@
     [downloadRequest.stream open];
     
     // 获得服务器这次请求 返回数据的总长度
-    NSInteger totalLength = [response.allHeaderFields[@"Content-Length"] integerValue] + [NSFileManager WMYfileLengthWithUrl:dataTask.taskDescription];
+    NSInteger totalLength = [response.allHeaderFields[@"Content-Length"] integerValue] + [NSFileManager WMYfileLengthWithUrl:downloadRequest.downModel.downUrl];
     downloadRequest.totalLength = totalLength;
     downloadRequest.totalLengthString = [self convertSize:totalLength];
-    
-    // 存储总长度
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:[NSFileManager WMYTotalLengthFilepath]];
-    if (dict == nil) dict = [NSMutableDictionary dictionary];
-    dict[[NSFileManager WMYfileNamemd5StringWith:downloadRequest.downModel.downUrl]] = @(totalLength);
-    [dict writeToFile:[NSFileManager WMYTotalLengthFilepath] atomically:YES];
     
     // 接收这个请求，允许接收服务器的数据
     completionHandler(NSURLSessionResponseAllow);
@@ -258,7 +270,7 @@
     [downloadRequest.stream write:data.bytes maxLength:data.length];
     
     // 下载进度
-    NSUInteger receivedSize = [NSFileManager WMYfileLengthWithUrl:dataTask.taskDescription];
+    NSUInteger receivedSize = [NSFileManager WMYfileLengthWithUrl:downloadRequest.downModel.downUrl];
     NSUInteger expectedSize = downloadRequest.totalLength;
     
     float progress = 1.0 * receivedSize / expectedSize;
@@ -287,6 +299,15 @@
     // 清除任务
     [self.downTasks removeObject:downloadRequest];
     
+    for (WMYDownloadRequest *requestObj in self.downTasks) {
+        if (requestObj.task.state == NSURLSessionTaskStateSuspended) {
+            [requestObj.task resume];
+            requestObj.downState = WMYStateStart;
+            requestObj.stateBlock(WMYStateStart);
+            break;
+        }
+    }
+    
     if ([self isDownCompletion:downloadRequest.downModel.downUrl]) {
         // 下载完成
         downloadRequest.downState = WMYStateCompleted;
@@ -297,8 +318,11 @@
         downloadRequest.stateBlock(WMYStateFailed);
     }
     
-    [NSFileManager WMYSaveVideoModelWith:downloadRequest];
-    
+    if (downloadRequest.downState == WMYStateCancel) {
+        [NSFileManager WMYDelVideoModelWith:downloadRequest.downModel.downUrl];
+    }else{
+        [NSFileManager WMYSaveVideoModelWith:downloadRequest];
+    }
 }
 
 #pragma mark 初始化

@@ -64,23 +64,34 @@
 }
 
 #pragma mark -- 本地文件大小
+
+/**
+ 本地文件大小
+
+ @param urlString 下载url
+
+ @return 返回大小
+ */
 + (NSInteger)WMYfileLengthWithUrl:(NSString *)urlString{
     
-    return [[[NSFileManager defaultManager] attributesOfItemAtPath:[NSFileManager WMYFilePathWithFileName:urlString] error:nil][NSFileSize] integerValue];
+    return [[[NSFileManager defaultManager] attributesOfItemAtPath:[NSFileManager WMYFilePathWithFileName:[NSFileManager WMYfileNamemd5StringWith:urlString]] error:nil][NSFileSize] integerValue];
 
-}
-
-#pragma mark -- 文件对应总长度列表
-+ (NSString *)WMYTotalLengthFilepath{
-    return [[NSFileManager WMYCachesDirectory] stringByAppendingPathComponent:@"totalLength.plist"];
 }
 
 #pragma mark --下载信息plist文件地址
+/**
+ 下载信息plist文件地址
+
+ @return 下载信息plist地址路径
+ */
 + (NSString *)WMYDownListPlistFilePath{
     return [[NSFileManager WMYCachesDirectory] stringByAppendingPathComponent:@"DownList.plist"];
 }
 
 #pragma mark --创建下载信息plist文件
+/**
+ 创建下载信息plist文件
+ */
 + (void)WMYCreateDownListPlist{
     if ([[NSFileManager defaultManager] fileExistsAtPath:[NSFileManager WMYDownListPlistFilePath]]) {
         
@@ -92,6 +103,11 @@
 };
 
 #pragma mark --存储下载电影信息
+/**
+ 存储下载电影信息
+
+ @param request 请求
+ */
 + (void)WMYSaveVideoModelWith:(WMYDownloadRequest *)request{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
@@ -101,13 +117,14 @@
         BOOL isEqualDic = NO;
         
         for (NSMutableDictionary *dic in infolist) {
-            if ([[dic objectForKey:@"videoName"] isEqualToString:request.downModel.videoName]) {
+            if ([[dic objectForKey:@"downUrl"] isEqualToString:request.downModel.downUrl]) {
                 
                 [dic setObject:[dic objectForKey:@"downUrl"] forKey:@"downUrl"];
                 [dic setObject:[dic objectForKey:@"videoName"] forKey:@"videoName"];
                 [dic setObject:[dic objectForKey:@"movieCid"] forKey:@"movieCid"];
                 [dic setObject:[dic objectForKey:@"movieKey"] forKey:@"movieKey"];
                 [dic setObject:[dic objectForKey:@"movieImgUrl"] forKey:@"movieImgUrl"];
+                [dic setObject:[NSNumber numberWithLongLong:request.totalLength] forKey:@"totalLength"];
                 [dic setObject:[NSNumber numberWithInteger:request.downState] forKey:@"state"];
                 [dic setObject:[NSNumber numberWithInteger:[[dic objectForKey:@"index"] integerValue]] forKey:@"index"];
                 
@@ -125,6 +142,7 @@
                                        @"movieCid": request.downModel.movieCid,
                                        @"movieKey": request.downModel.movieKey,
                                        @"movieImgUrl": request.downModel.movieImgUrl,
+                                       @"totalLength": [NSNumber numberWithLongLong:request.totalLength],
                                        @"state": [NSNumber numberWithInteger:request.downState],
                                        @"index": [NSNumber numberWithInteger:infolist.count]
                                        };
@@ -140,6 +158,79 @@
     });
 }
 
+#pragma mark --获取对应url的电影信息
+/**
+ 获取对应url的电影信息
 
+ @param videoUrl 对应电影下载url
+
+ @return 电影信息字典
+ */
++ (id)WMYGetVideonModelWith:(NSString *)videoUrl{
+    
+    NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
+    
+    BOOL isEqualDic = NO;
+    
+    for (NSMutableDictionary *dic in infolist) {
+        if ([[dic objectForKey:@"downUrl"] isEqualToString:videoUrl]) {
+            isEqualDic = YES;
+            return dic;
+        }
+    }
+    return nil;
+
+}
+
+#pragma mark --获取全部下载完成的电影信息
+/**
+ 获取全部下载完成的电影信息
+
+ @return 下载完成信息数组
+ */
++ (id)WMYGetAllVideonModel{
+    
+    NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
+    
+    NSMutableArray *completedVideoArray = [NSMutableArray array];
+    
+    for (NSMutableDictionary *dic in infolist) {
+        if ([[dic objectForKey:@"state"] integerValue] == 2) {
+            [completedVideoArray addObject:dic];
+        }
+    }
+    
+    return completedVideoArray;
+}
+
+#pragma mark --删除对应url的电影信息
+/**
+ 删除对应url的电影信息
+
+ @param videoUrl videoUrl 对应电影下载url
+ */
++ (void)WMYDelVideoModelWith:(NSString *)videoUrl{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
+        
+        NSInteger index = 0;
+        BOOL isEqual = NO;
+        
+        for (int i = 0; i < infolist.count; i++) {
+            if ([[[infolist objectAtIndex:i] objectForKey:@"downUrl"] isEqualToString:videoUrl]) {
+                index = i;
+                isEqual = YES;
+                NSLog(@"有相同的");
+            }
+        }
+        
+        if (isEqual) {
+            [infolist removeObjectAtIndex:index];
+            
+             [infolist writeToFile:[NSFileManager WMYDownListPlistFilePath] atomically:YES];
+        }
+    
+    });
+}
 
 @end

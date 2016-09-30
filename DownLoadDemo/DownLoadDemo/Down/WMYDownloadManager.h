@@ -53,4 +53,11 @@ typedef void(^stateBlock)(WMYDownloadState state);
  */
 - (void)download:(WMYDownModel *)model progressBlock:(progressBlock)progressBlock stateBlock:(stateBlock)stateBlock;
 
+/**
+ 删除对应的下载任务
+
+ @param url 下载url
+ */
+- (void)delDownLoadForUrl:(NSString *)url;
+
 @end

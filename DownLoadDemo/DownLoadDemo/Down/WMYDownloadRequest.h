@@ -13,6 +13,7 @@ typedef enum {
     WMYStateStart = 0,     ///下载中
     WMYStateSuspended,     ///暂停中
     WMYStateCompleted,     ///完成
+    WMYStateCancel,         ///取消
     WMYStateFailed         ///失败
 }WMYDownloadState;
 

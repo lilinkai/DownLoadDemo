@@ -95,6 +95,8 @@
     
     [cell.pauseButton addTarget:self action:@selector(managerButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    [cell.delButton addTarget:self action:@selector(delButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     switch (request.downState) {
         case WMYStateStart:
             [cell.pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
@@ -135,6 +137,13 @@
     }
 }
 
+- (void)delButtonClickAction:(UIButton *)btn{
+    
+     WMYDownloadRequest *request = [_listArr objectAtIndex:btn.tag];
+    
+    [[WMYDownloadManager sharedInstance] delDownLoadForUrl:request.downModel.downUrl];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     
@@ -142,6 +151,8 @@
 }
 
 - (void)updateCellOnMainThread:(NSDictionary *)dic{
+    
+    NSLog(@"更新了");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         RootCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
@@ -169,6 +180,18 @@
                 cell.downState.text = @"暂停";
                 break;
             case WMYStateCompleted:
+                [cell.pauseButton setTitle:@"删除" forState:UIControlStateNormal];
+                cell.downState.text = @"完成";
+                _listArr = [WMYDownloadManager sharedInstance].downTasks;
+                [self.contentTableView reloadData];
+                break;
+            case WMYStateCancel:
+                [cell.pauseButton setTitle:@"删除" forState:UIControlStateNormal];
+                cell.downState.text = @"完成";
+                _listArr = [WMYDownloadManager sharedInstance].downTasks;
+                [self.contentTableView reloadData];
+                break;
+            case WMYStateFailed:
                 [cell.pauseButton setTitle:@"删除" forState:UIControlStateNormal];
                 cell.downState.text = @"完成";
                 _listArr = [WMYDownloadManager sharedInstance].downTasks;

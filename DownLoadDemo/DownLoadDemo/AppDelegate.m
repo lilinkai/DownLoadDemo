@@ -19,6 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [[WMYDownloadManager sharedInstance] startLocalDownTask];
+    
+    NSArray *videoArray = [NSFileManager WMYGetAllVideonModel];
     // Override p啊oint for customization after application launch.
     return YES;
 }

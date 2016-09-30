@@ -26,9 +26,6 @@
 #pragma mark -- 本地文件大小
 + (NSInteger)WMYfileLengthWithUrl:(NSString *)urlString;
 
-#pragma mark -- 文件对应总长度列表
-+ (NSString *)WMYTotalLengthFilepath;
-
 #pragma mark --下载信息plist文件地址
 + (NSString *)WMYDownListPlistFilePath;
 
@@ -37,5 +34,14 @@
 
 #pragma mark --存储下载电影信息
 + (void)WMYSaveVideoModelWith:(WMYDownloadRequest *)request;
+
+#pragma mark --获取对应url的电影信息
++ (id)WMYGetVideonModelWith:(NSString *)videoUrl;
+
+#pragma mark --获取全部下载完成的电影信息
++ (id)WMYGetAllVideonModel;
+
+#pragma mark --删除对应url的电影信息
++ (void)WMYDelVideoModelWith:(NSString *)videoUrl;
 
 @end
