@@ -11,6 +11,7 @@
 #import "WMYDownModel.h"
 #import "ListVC.h"
 #import "RootCell.h"
+#import "NSFileManager+WMYDownLoadFileConfig.h"
 
 @interface RootVC ()
 
@@ -84,6 +85,7 @@
     } stateBlock:^(WMYDownloadState state) {
         
     }];
+
 }
 
 - (IBAction)downButtonAction:(UIButton *)sender {

@@ -30,6 +30,11 @@ typedef void(^stateBlock)(WMYDownloadState state);
 
 
 /**
+ 开启本地存在的下载
+ */
+- (void)startLocalDownTask;
+
+/**
  获取对应url下载任务
 
  @param url 下载url

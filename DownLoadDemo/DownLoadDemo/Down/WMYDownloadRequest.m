@@ -8,6 +8,7 @@
 
 #import "WMYDownloadRequest.h"
 #import "WMYDownloadManager.h"
+#import "NSFileManager+WMYDownLoadFileConfig.h"
 
 @interface WMYDownloadRequest ()
 {

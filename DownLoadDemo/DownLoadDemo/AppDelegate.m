@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "NSFileManager+WMYDownLoadFileConfig.h"
+#import "WMYDownloadManager.h"
 
 @interface AppDelegate ()
 
@@ -15,7 +17,9 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [[WMYDownloadManager sharedInstance] startLocalDownTask];
+    // Override p啊oint for customization after application launch.
     return YES;
 }
 

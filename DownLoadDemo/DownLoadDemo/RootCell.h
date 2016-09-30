@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UILabel *downLengthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *seepLabel;
+@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 
 @end

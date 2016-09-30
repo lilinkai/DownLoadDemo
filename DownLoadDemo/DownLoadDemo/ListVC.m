@@ -81,14 +81,19 @@
     
     cell.downNameLabel.text = request.downModel.videoName;
     
+    cell.pauseButton.tag = indexPath.row;
+    
     switch (request.downState) {
         case WMYStateStart:
+            [cell.pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
             cell.downState.text = @"下载中";
             break;
         case WMYStateSuspended:
+            [cell.pauseButton setTitle:@"开始下载" forState:UIControlStateNormal];
             cell.downState.text = @"暂停";
             break;
         case WMYStateCompleted:
+            [cell.pauseButton setTitle:@"删除" forState:UIControlStateNormal];
             cell.downState.text = @"完成";
             _listArr = [WMYDownloadManager sharedInstance].downTasks;
             [self.contentTableView reloadData];
@@ -102,14 +107,25 @@
     return cell;
 }
 
+- (void)managerButtonClickAction:(UIButton *)btn{
+
+    WMYDownloadRequest *request = [_listArr objectAtIndex:btn.tag];
+    
+    if ([btn.titleLabel.text isEqualToString:@"暂停"] || [btn.titleLabel.text isEqualToString:@"开始下载"]) {
+        
+        [[WMYDownloadManager sharedInstance] download:request.downModel progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
+            
+        } stateBlock:^(WMYDownloadState state) {
+            
+        }];
+    }else if ([btn.titleLabel.text isEqualToString:@"删除"]){
+        NSLog(@"删除视频");
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    WMYDownloadRequest *request = [_listArr objectAtIndex:indexPath.row];
-    [[WMYDownloadManager sharedInstance] download:request.downModel progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
-        
-    } stateBlock:^(WMYDownloadState state) {
-        
-    }];
+    
     
 }
 

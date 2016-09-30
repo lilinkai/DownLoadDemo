@@ -8,6 +8,7 @@
 
 #import "WMYDownloadManager.h"
 #import "WMYDownloadRequest.h"
+#import "NSFileManager+WMYDownLoadFileConfig.h"
 
 #define downLoadCount 1
 
@@ -30,6 +31,7 @@
     dispatch_once(&onceToken, ^{
         manager = [[WMYDownloadManager alloc] init];
         [NSFileManager WMYCreateCacheDirectory];
+        [NSFileManager WMYCreateDownListPlist];
     });
     return manager;
 }
@@ -45,6 +47,29 @@
         }
     }
     return downloadRequest;
+}
+
+#pragma mark --开启本地存储的下载
+- (void)startLocalDownTask{
+    NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
+    
+    for (NSDictionary *dic in infolist) {
+        
+        WMYDownModel *model = [[WMYDownModel alloc]init];
+        model.downUrl = [dic objectForKey:@"downUrl"];
+        model.videoName = [dic objectForKey:@"videoName"];
+        model.movieCid = [dic objectForKey:@"movieCid"];
+        model.movieKey = [dic objectForKey:@"movieKey"];
+        model.movieImgUrl = [dic objectForKey:@"movieImgUrl"];
+        
+        if ([[dic objectForKey:@"state"] integerValue] == WMYStateStart || [[dic objectForKey:@"state"] integerValue] == WMYStateSuspended) {
+            [[WMYDownloadManager sharedInstance] download:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
+                
+            } stateBlock:^(WMYDownloadState state) {
+                
+            }];
+        }
+    }
 }
 
 /**
@@ -67,6 +92,10 @@
 {
     NSString *totalLengthPath = [NSFileManager WMYTotalLengthFilepath];
     NSString *md5Url = [NSFileManager WMYfileNamemd5StringWith:url];
+    
+    NSLog(@"total ========== %ld", [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]);
+    
+    NSLog(@"length ========== %ld", [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]);
     
     if ([[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue] && [NSFileManager WMYfileLengthWithUrl:md5Url] == [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]) {
         return YES;
@@ -175,9 +204,9 @@
             //超出队列限制 暂停状态
             request.downState = WMYStateSuspended;
             request.stateBlock(WMYStateSuspended);
-            [request.task suspend];
         }else{
             //开始下载
+            request.downState = WMYStateStart;
             [request.task resume];
         }
     }
@@ -191,6 +220,9 @@
 {
     WMYDownloadRequest *downloadRequest = [self getDownloadRequest:dataTask.taskDescription];
     
+    [NSFileManager WMYSaveVideoModelWith:downloadRequest];
+    
+    downloadRequest.downState = WMYStateStart;
     downloadRequest.stateBlock(WMYStateStart);
     
     // 打开流
@@ -210,6 +242,7 @@
     // 接收这个请求，允许接收服务器的数据
     completionHandler(NSURLSessionResponseAllow);
     
+    [NSFileManager WMYSaveVideoModelWith:downloadRequest];
     NSLog(@"开始接受文件流");
 }
 
@@ -242,6 +275,8 @@
  */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
+    NSLog(@"请求完毕");
+    
     WMYDownloadRequest *downloadRequest = [self getDownloadRequest:task.taskDescription];
     
     // 关闭流
@@ -253,13 +288,16 @@
     
     if ([self isDownCompletion:[NSFileManager WMYfileNamemd5StringWith:downloadRequest.downModel.downUrl]]) {
         // 下载完成
+        downloadRequest.downState = WMYStateCompleted;
         downloadRequest.stateBlock(WMYStateCompleted);
     } else if (error){
         // 下载失败
+        downloadRequest.downState = WMYStateFailed;
         downloadRequest.stateBlock(WMYStateFailed);
     }
-    NSLog(@"请求完毕");
-
+    
+    [NSFileManager WMYSaveVideoModelWith:downloadRequest];
+    
 }
 
 #pragma mark 初始化

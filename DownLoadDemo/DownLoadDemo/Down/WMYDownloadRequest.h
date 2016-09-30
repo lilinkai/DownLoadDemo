@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "WMYDownModel.h"
-#import "NSFileManager+WMYDownLoadFileConfig.h"
 
 typedef enum {
     WMYStateStart = 0,     ///下载中

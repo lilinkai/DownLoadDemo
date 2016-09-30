@@ -38,10 +38,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" id="zoZ-79-E5N">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="92" width="1000" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zoZ-79-E5N" id="zQD-wo-do3">
-                                            <frame key="frameInset" width="375" height="39"/>
+                                            <frame key="frameInset" width="1000" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -131,6 +131,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-dJ-5oD">
+                                                    <frame key="frameInset" minX="18" minY="17" width="66" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <state key="normal" title="暂停">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="zu0-yq-dNB" secondAttribute="trailing" constant="15" id="3T8-Gv-ml7"/>
@@ -155,6 +164,7 @@
                                             <outlet property="downLengthLabel" destination="3Uj-vg-swp" id="Yb6-o2-iPC"/>
                                             <outlet property="downNameLabel" destination="lMm-fN-R6G" id="bWq-eu-r9X"/>
                                             <outlet property="downState" destination="zu0-yq-dNB" id="UH1-XD-uFw"/>
+                                            <outlet property="pauseButton" destination="Uc7-dJ-5oD" id="Bih-UI-PWf"/>
                                             <outlet property="progressView" destination="maG-Nv-D6Z" id="ukA-hy-nXh"/>
                                             <outlet property="seepLabel" destination="x53-os-aDN" id="B7v-zi-Hbu"/>
                                         </connections>
@@ -180,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9o-YM-lHa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="407" y="-288"/>
+            <point key="canvasLocation" x="405.60000000000002" y="-288.30584707646182"/>
         </scene>
     </scenes>
     <resources>

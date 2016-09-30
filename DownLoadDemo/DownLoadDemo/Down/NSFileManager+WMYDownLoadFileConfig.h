@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WMYDownloadRequest.h"
 
 @interface NSFileManager (WMYDownLoadFileConfig)
 
@@ -27,5 +28,14 @@
 
 #pragma mark -- 文件对应总长度列表
 + (NSString *)WMYTotalLengthFilepath;
+
+#pragma mark --下载信息plist文件地址
++ (NSString *)WMYDownListPlistFilePath;
+
+#pragma mark --创建下载信息plist文件
++ (void)WMYCreateDownListPlist;
+
+#pragma mark --存储下载电影信息
++ (void)WMYSaveVideoModelWith:(WMYDownloadRequest *)request;
 
 @end
