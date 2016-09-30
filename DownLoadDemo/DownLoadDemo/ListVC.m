@@ -29,7 +29,7 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+  
     _listArr = [WMYDownloadManager sharedInstance].downTasks;
    
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(doneDownLoad)];

@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *downLengthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *seepLabel;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
+@property (weak, nonatomic) IBOutlet UIButton *delButton;
 
 @end
