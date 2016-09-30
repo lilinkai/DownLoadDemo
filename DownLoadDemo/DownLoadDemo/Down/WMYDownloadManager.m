@@ -192,6 +192,8 @@
         //未存在添加到下载队列数组中
         [self.downTasks addObject:request];
         
+        [NSFileManager WMYSaveVideoModelWith:request];
+        
         NSInteger count = 0;
         
         for (WMYDownloadRequest *requestObj in self.downTasks) {
