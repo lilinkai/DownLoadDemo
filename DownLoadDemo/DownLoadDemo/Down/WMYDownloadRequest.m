@@ -36,6 +36,8 @@
     // 创建流
     self.stream = [NSOutputStream outputStreamToFileAtPath:[NSFileManager WMYFilePathWithFileName:[NSFileManager WMYfileNamemd5StringWith:self.downModel.downUrl]] append:YES];
     
+    NSLog(@"aaaaaaaaaaaaa =========== %@", [NSFileManager WMYFilePathWithFileName:[NSFileManager WMYfileNamemd5StringWith:self.downModel.downUrl]]);
+    
     //每0.5秒计算一次文件大小增加部分的尺寸
     _timer=[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(getGrowthSize) userInfo:nil repeats:YES];
 }

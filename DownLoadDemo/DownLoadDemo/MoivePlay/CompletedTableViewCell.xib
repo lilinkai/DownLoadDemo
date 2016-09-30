@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="KGk-i7-Jjw" customClass="CompletedTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="99"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lauchimage.png" translatesAutoresizingMaskIntoConstraints="NO" id="0go-fR-68a"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f91-d1-Ky9">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="FW7-WZ-Sl4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1024M" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXt-bZ-Crz">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="isW-22-e5s"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="0go-fR-68a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="2VZ-Sd-Eee"/>
+                    <constraint firstItem="iXt-bZ-Crz" firstAttribute="leading" secondItem="0go-fR-68a" secondAttribute="trailing" constant="23" id="6yO-Pc-4En"/>
+                    <constraint firstItem="f91-d1-Ky9" firstAttribute="leading" secondItem="0go-fR-68a" secondAttribute="trailing" constant="23" id="CTI-dG-fxg"/>
+                    <constraint firstAttribute="trailing" secondItem="f91-d1-Ky9" secondAttribute="trailing" constant="50" id="D3f-EH-zwY"/>
+                    <constraint firstAttribute="bottom" secondItem="iXt-bZ-Crz" secondAttribute="bottom" constant="20" id="D42-f4-gTm"/>
+                    <constraint firstAttribute="trailing" secondItem="0go-fR-68a" secondAttribute="trailing" constant="217" id="F46-KP-ABa"/>
+                    <constraint firstItem="0go-fR-68a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Izp-re-Lwu"/>
+                    <constraint firstItem="f91-d1-Ky9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="Wtw-ki-Exx"/>
+                    <constraint firstAttribute="trailing" secondItem="iXt-bZ-Crz" secondAttribute="trailing" constant="50" id="kfd-Fs-hLh"/>
+                    <constraint firstAttribute="bottom" secondItem="0go-fR-68a" secondAttribute="bottom" constant="11" id="w75-kn-vEh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="movieName" destination="f91-d1-Ky9" id="UuE-Kx-bdR"/>
+                <outlet property="sizeLable" destination="iXt-bZ-Crz" id="nRe-0P-ppm"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="150"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="lauchimage.png" width="640" height="960"/>
+    </resources>
+</document>

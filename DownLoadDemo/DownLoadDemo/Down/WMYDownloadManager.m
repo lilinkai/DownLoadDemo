@@ -95,7 +95,7 @@
     
     NSLog(@"total ========== %ld", [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]);
     
-    NSLog(@"length ========== %ld", [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]);
+    NSLog(@"length ========== %ld", [NSFileManager WMYfileLengthWithUrl:md5Url]);
     
     if ([[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue] && [NSFileManager WMYfileLengthWithUrl:md5Url] == [[NSDictionary dictionaryWithContentsOfFile:totalLengthPath][md5Url] integerValue]) {
         return YES;
@@ -129,19 +129,14 @@
  */
 - (void)download:(WMYDownModel *)model progressBlock:(progressBlock)progressBlock stateBlock:(stateBlock)stateBlock{
     
+    if ([self isDownCompletion:model.downUrl]) {
+        return;
+    }
+    
     WMYDownloadRequest *request = [self getRequestForUrl:model.downUrl];
     
     if (request) {
-        if ([self isDownCompletion:request.downModel.downUrl]) {
-            
-            NSLog(@"已经下载完成");
-            request.downState = WMYStateCompleted;
-            
-            [request.timer invalidate];
-            
-            return;
-        }
-        
+
         if (request.task.state == NSURLSessionTaskStateRunning) {
             for (WMYDownloadRequest *requestObj in self.downTasks) {
                 if (requestObj.task.state == NSURLSessionTaskStateSuspended) {
@@ -181,13 +176,17 @@
         request.stateBlock = stateBlock;
         [request configDownRequest];
         
+        // 设置请求头
+        NSString *range = [NSString stringWithFormat:@"bytes=%zd-", [NSFileManager WMYfileLengthWithUrl:[NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl]]];
+        
+        NSLog(@"rangerange ===== %@", range);
+        
+        [request.urlRequest setValue:range forHTTPHeaderField:@"Range"];
+        
+        
         NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request.urlRequest];
         request.task = task;
         request.task.taskDescription = [NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl];
-        
-        // 设置请求头
-        NSString *range = [NSString stringWithFormat:@"bytes=%zd-", [NSFileManager WMYfileLengthWithUrl:[NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl]]];
-        [request.urlRequest setValue:range forHTTPHeaderField:@"Range"];
         
         //未存在添加到下载队列数组中
         [self.downTasks addObject:request];
@@ -231,7 +230,7 @@
     [downloadRequest.stream open];
     
     // 获得服务器这次请求 返回数据的总长度
-    NSInteger totalLength = [response.allHeaderFields[@"Content-Length"] integerValue];
+    NSInteger totalLength = [response.allHeaderFields[@"Content-Length"] integerValue] + [NSFileManager WMYfileLengthWithUrl:dataTask.taskDescription];
     downloadRequest.totalLength = totalLength;
     downloadRequest.totalLengthString = [self convertSize:totalLength];
     
@@ -288,7 +287,7 @@
     // 清除任务
     [self.downTasks removeObject:downloadRequest];
     
-    if ([self isDownCompletion:[NSFileManager WMYfileNamemd5StringWith:downloadRequest.downModel.downUrl]]) {
+    if ([self isDownCompletion:downloadRequest.downModel.downUrl]) {
         // 下载完成
         downloadRequest.downState = WMYStateCompleted;
         downloadRequest.stateBlock(WMYStateCompleted);

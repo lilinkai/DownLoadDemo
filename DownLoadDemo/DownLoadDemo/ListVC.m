@@ -11,6 +11,7 @@
 #import "WMYDownloadRequest.h"
 #import "ListCell.h"
 #import "RootCell.h"
+#import "CompletedViewController.h"
 
 @interface ListVC ()
 
@@ -31,7 +32,16 @@
     
     _listArr = [WMYDownloadManager sharedInstance].downTasks;
    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(doneDownLoad)];
+    self.navigationItem.rightBarButtonItem = item;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
+}
+
+- (void)doneDownLoad{
+    CompletedViewController * co = [[CompletedViewController alloc] init];
+    [self.navigationController pushViewController:co animated:YES];
 }
 
 - (WMYDownloadManager *)downloadManager
@@ -82,6 +92,8 @@
     cell.downNameLabel.text = request.downModel.videoName;
     
     cell.pauseButton.tag = indexPath.row;
+    
+    [cell.pauseButton addTarget:self action:@selector(managerButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     
     switch (request.downState) {
         case WMYStateStart:
@@ -149,12 +161,15 @@
         
         switch ([[dic objectForKey:@"state"] integerValue]) {
             case WMYStateStart:
+                [cell.pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
                 cell.downState.text = @"下载中";
                 break;
             case WMYStateSuspended:
+                [cell.pauseButton setTitle:@"开始下载" forState:UIControlStateNormal];
                 cell.downState.text = @"暂停";
                 break;
             case WMYStateCompleted:
+                [cell.pauseButton setTitle:@"删除" forState:UIControlStateNormal];
                 cell.downState.text = @"完成";
                 _listArr = [WMYDownloadManager sharedInstance].downTasks;
                 [self.contentTableView reloadData];

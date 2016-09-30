@@ -40,7 +40,7 @@
     self.downUrlArray = [NSMutableArray array];
     
     WMYDownModel *model1 = [[WMYDownModel alloc]init];
-    model1.downUrl = @"http://baobab.cdn.wandoujia.com/14468618701471.mp4";
+    model1.downUrl = @"http://120.25.226.186:32812/resources/videos/minion_01.mp4";
     model1.videoName = @"魔兽世界预告片";
     model1.movieCid = @"111111";
     model1.movieKey = @"222222";

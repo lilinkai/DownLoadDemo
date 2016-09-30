@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A615AA391D9E3BC900288677 /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA1E1D9E3BC900288677 /* ActionButton.m */; };
+		A615AA3A1D9E3BC900288677 /* DTPlayerSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA221D9E3BC900288677 /* DTPlayerSupport.m */; };
+		A615AA3B1D9E3BC900288677 /* DTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA241D9E3BC900288677 /* DTPlayerView.m */; };
+		A615AA3C1D9E3BC900288677 /* UIView+Constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA261D9E3BC900288677 /* UIView+Constraint.m */; };
+		A615AA3D1D9E3BC900288677 /* CompletedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA281D9E3BC900288677 /* CompletedTableViewCell.m */; };
+		A615AA3E1D9E3BC900288677 /* CompletedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A615AA291D9E3BC900288677 /* CompletedTableViewCell.xib */; };
+		A615AA3F1D9E3BC900288677 /* CompletedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA2B1D9E3BC900288677 /* CompletedViewController.m */; };
+		A615AA401D9E3BC900288677 /* CompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A615AA2C1D9E3BC900288677 /* CompletedViewController.xib */; };
+		A615AA411D9E3BC900288677 /* DTMoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA2E1D9E3BC900288677 /* DTMoviePlayerViewController.m */; };
+		A615AA421D9E3BC900288677 /* DTMoviePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A615AA2F1D9E3BC900288677 /* DTMoviePlayerViewController.xib */; };
+		A615AA431D9E3BC900288677 /* icon_back_white_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A615AA301D9E3BC900288677 /* icon_back_white_pressed.png */; };
+		A615AA441D9E3BC900288677 /* icon_pause_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = A615AA311D9E3BC900288677 /* icon_pause_normal.png */; };
+		A615AA451D9E3BC900288677 /* icon_pause_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A615AA321D9E3BC900288677 /* icon_pause_pressed.png */; };
+		A615AA461D9E3BC900288677 /* icon_play_nomal.png in Resources */ = {isa = PBXBuildFile; fileRef = A615AA331D9E3BC900288677 /* icon_play_nomal.png */; };
+		A615AA471D9E3BC900288677 /* icon_play_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A615AA341D9E3BC900288677 /* icon_play_pressed.png */; };
+		A615AA481D9E3BC900288677 /* icon_zoomout_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A615AA351D9E3BC900288677 /* icon_zoomout_pressed.png */; };
+		A615AA491D9E3BC900288677 /* q.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A615AA361D9E3BC900288677 /* q.jpg */; };
+		A615AA4A1D9E3BC900288677 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A615AA381D9E3BC900288677 /* UIView+Additions.m */; };
 		A616E9791D9BC56C00EF2317 /* login_startup.png in Resources */ = {isa = PBXBuildFile; fileRef = A616E9781D9BC56C00EF2317 /* login_startup.png */; };
 		A616E97C1D9BC9BC00EF2317 /* RootCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A616E97B1D9BC9BC00EF2317 /* RootCell.m */; };
 		A68438521D92C6FB003E3EB0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A68438511D92C6FB003E3EB0 /* main.m */; };
@@ -24,6 +42,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A615AA1D1D9E3BC900288677 /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
+		A615AA1E1D9E3BC900288677 /* ActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionButton.m; sourceTree = "<group>"; };
+		A615AA201D9E3BC900288677 /* DTPlayerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayerConfig.h; sourceTree = "<group>"; };
+		A615AA211D9E3BC900288677 /* DTPlayerSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayerSupport.h; sourceTree = "<group>"; };
+		A615AA221D9E3BC900288677 /* DTPlayerSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPlayerSupport.m; sourceTree = "<group>"; };
+		A615AA231D9E3BC900288677 /* DTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayerView.h; sourceTree = "<group>"; };
+		A615AA241D9E3BC900288677 /* DTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPlayerView.m; sourceTree = "<group>"; };
+		A615AA251D9E3BC900288677 /* UIView+Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraint.h"; sourceTree = "<group>"; };
+		A615AA261D9E3BC900288677 /* UIView+Constraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Constraint.m"; sourceTree = "<group>"; };
+		A615AA271D9E3BC900288677 /* CompletedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedTableViewCell.h; sourceTree = "<group>"; };
+		A615AA281D9E3BC900288677 /* CompletedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedTableViewCell.m; sourceTree = "<group>"; };
+		A615AA291D9E3BC900288677 /* CompletedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletedTableViewCell.xib; sourceTree = "<group>"; };
+		A615AA2A1D9E3BC900288677 /* CompletedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedViewController.h; sourceTree = "<group>"; };
+		A615AA2B1D9E3BC900288677 /* CompletedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedViewController.m; sourceTree = "<group>"; };
+		A615AA2C1D9E3BC900288677 /* CompletedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletedViewController.xib; sourceTree = "<group>"; };
+		A615AA2D1D9E3BC900288677 /* DTMoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMoviePlayerViewController.h; sourceTree = "<group>"; };
+		A615AA2E1D9E3BC900288677 /* DTMoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMoviePlayerViewController.m; sourceTree = "<group>"; };
+		A615AA2F1D9E3BC900288677 /* DTMoviePlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DTMoviePlayerViewController.xib; sourceTree = "<group>"; };
+		A615AA301D9E3BC900288677 /* icon_back_white_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_back_white_pressed.png; sourceTree = "<group>"; };
+		A615AA311D9E3BC900288677 /* icon_pause_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pause_normal.png; sourceTree = "<group>"; };
+		A615AA321D9E3BC900288677 /* icon_pause_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pause_pressed.png; sourceTree = "<group>"; };
+		A615AA331D9E3BC900288677 /* icon_play_nomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_play_nomal.png; sourceTree = "<group>"; };
+		A615AA341D9E3BC900288677 /* icon_play_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_play_pressed.png; sourceTree = "<group>"; };
+		A615AA351D9E3BC900288677 /* icon_zoomout_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_zoomout_pressed.png; sourceTree = "<group>"; };
+		A615AA361D9E3BC900288677 /* q.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = q.jpg; sourceTree = "<group>"; };
+		A615AA371D9E3BC900288677 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
+		A615AA381D9E3BC900288677 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		A616E9781D9BC56C00EF2317 /* login_startup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_startup.png; sourceTree = "<group>"; };
 		A616E97A1D9BC9BC00EF2317 /* RootCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootCell.h; sourceTree = "<group>"; };
 		A616E97B1D9BC9BC00EF2317 /* RootCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootCell.m; sourceTree = "<group>"; };
@@ -62,6 +107,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A615AA1C1D9E3BC900288677 /* MoivePlay */ = {
+			isa = PBXGroup;
+			children = (
+				A615AA1D1D9E3BC900288677 /* ActionButton.h */,
+				A615AA1E1D9E3BC900288677 /* ActionButton.m */,
+				A615AA1F1D9E3BC900288677 /* AVPlayerKit */,
+				A615AA271D9E3BC900288677 /* CompletedTableViewCell.h */,
+				A615AA281D9E3BC900288677 /* CompletedTableViewCell.m */,
+				A615AA291D9E3BC900288677 /* CompletedTableViewCell.xib */,
+				A615AA2A1D9E3BC900288677 /* CompletedViewController.h */,
+				A615AA2B1D9E3BC900288677 /* CompletedViewController.m */,
+				A615AA2C1D9E3BC900288677 /* CompletedViewController.xib */,
+				A615AA2D1D9E3BC900288677 /* DTMoviePlayerViewController.h */,
+				A615AA2E1D9E3BC900288677 /* DTMoviePlayerViewController.m */,
+				A615AA2F1D9E3BC900288677 /* DTMoviePlayerViewController.xib */,
+				A615AA301D9E3BC900288677 /* icon_back_white_pressed.png */,
+				A615AA311D9E3BC900288677 /* icon_pause_normal.png */,
+				A615AA321D9E3BC900288677 /* icon_pause_pressed.png */,
+				A615AA331D9E3BC900288677 /* icon_play_nomal.png */,
+				A615AA341D9E3BC900288677 /* icon_play_pressed.png */,
+				A615AA351D9E3BC900288677 /* icon_zoomout_pressed.png */,
+				A615AA361D9E3BC900288677 /* q.jpg */,
+				A615AA371D9E3BC900288677 /* UIView+Additions.h */,
+				A615AA381D9E3BC900288677 /* UIView+Additions.m */,
+			);
+			path = MoivePlay;
+			sourceTree = "<group>";
+		};
+		A615AA1F1D9E3BC900288677 /* AVPlayerKit */ = {
+			isa = PBXGroup;
+			children = (
+				A615AA201D9E3BC900288677 /* DTPlayerConfig.h */,
+				A615AA211D9E3BC900288677 /* DTPlayerSupport.h */,
+				A615AA221D9E3BC900288677 /* DTPlayerSupport.m */,
+				A615AA231D9E3BC900288677 /* DTPlayerView.h */,
+				A615AA241D9E3BC900288677 /* DTPlayerView.m */,
+				A615AA251D9E3BC900288677 /* UIView+Constraint.h */,
+				A615AA261D9E3BC900288677 /* UIView+Constraint.m */,
+			);
+			path = AVPlayerKit;
+			sourceTree = "<group>";
+		};
 		A68438441D92C6FB003E3EB0 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +168,7 @@
 		A684384F1D92C6FB003E3EB0 /* DownLoadDemo */ = {
 			isa = PBXGroup;
 			children = (
+				A615AA1C1D9E3BC900288677 /* MoivePlay */,
 				A691DFEF1D937D6C0027D36B /* Down */,
 				A68438531D92C6FB003E3EB0 /* AppDelegate.h */,
 				A68438541D92C6FB003E3EB0 /* AppDelegate.m */,
@@ -184,9 +272,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A615AA421D9E3BC900288677 /* DTMoviePlayerViewController.xib in Resources */,
+				A615AA3E1D9E3BC900288677 /* CompletedTableViewCell.xib in Resources */,
+				A615AA441D9E3BC900288677 /* icon_pause_normal.png in Resources */,
+				A615AA481D9E3BC900288677 /* icon_zoomout_pressed.png in Resources */,
+				A615AA471D9E3BC900288677 /* icon_play_pressed.png in Resources */,
 				A68438601D92C6FB003E3EB0 /* LaunchScreen.storyboard in Resources */,
+				A615AA451D9E3BC900288677 /* icon_pause_pressed.png in Resources */,
+				A615AA401D9E3BC900288677 /* CompletedViewController.xib in Resources */,
+				A615AA431D9E3BC900288677 /* icon_back_white_pressed.png in Resources */,
+				A615AA491D9E3BC900288677 /* q.jpg in Resources */,
 				A616E9791D9BC56C00EF2317 /* login_startup.png in Resources */,
 				A684385D1D92C6FB003E3EB0 /* Assets.xcassets in Resources */,
+				A615AA461D9E3BC900288677 /* icon_play_nomal.png in Resources */,
 				A684385B1D92C6FB003E3EB0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,16 +296,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A615AA3F1D9E3BC900288677 /* CompletedViewController.m in Sources */,
 				A6B845841D98C018007CFF0E /* ListVC.m in Sources */,
+				A615AA3C1D9E3BC900288677 /* UIView+Constraint.m in Sources */,
 				A68B28DC1D92C9C700EA3067 /* RootVC.m in Sources */,
 				A691E0071D952D9E0027D36B /* WMYDownloadRequest.m in Sources */,
 				A68438551D92C6FB003E3EB0 /* AppDelegate.m in Sources */,
 				A68438521D92C6FB003E3EB0 /* main.m in Sources */,
 				A691DFFE1D9510760027D36B /* WMYDownloadManager.m in Sources */,
+				A615AA3A1D9E3BC900288677 /* DTPlayerSupport.m in Sources */,
+				A615AA411D9E3BC900288677 /* DTMoviePlayerViewController.m in Sources */,
+				A615AA391D9E3BC900288677 /* ActionButton.m in Sources */,
 				A691E0011D952D640027D36B /* NSFileManager+WMYDownLoadFileConfig.m in Sources */,
+				A615AA4A1D9E3BC900288677 /* UIView+Additions.m in Sources */,
 				A6B8458B1D990FFE007CFF0E /* ListCell.m in Sources */,
+				A615AA3D1D9E3BC900288677 /* CompletedTableViewCell.m in Sources */,
 				A691E0041D952D700027D36B /* WMYDownModel.m in Sources */,
 				A616E97C1D9BC9BC00EF2317 /* RootCell.m in Sources */,
+				A615AA3B1D9E3BC900288677 /* DTPlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
