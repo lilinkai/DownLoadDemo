@@ -40,8 +40,7 @@
 }
 
 - (void)doneDownLoad{
-    CompletedViewController * co = [[CompletedViewController alloc] init];
-    [self.navigationController pushViewController:co animated:YES];
+    [[WMYDownloadManager sharedInstance] suspendedAllDownLoad];
 }
 
 - (WMYDownloadManager *)downloadManager

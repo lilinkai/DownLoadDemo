@@ -60,4 +60,11 @@ typedef void(^stateBlock)(WMYDownloadState state);
  */
 - (void)delDownLoadForUrl:(NSString *)url;
 
+/**
+ 暂停全部请求
+ */
+- (void)suspendedAllDownLoad;
+
+
+
 @end

@@ -125,12 +125,15 @@
  */
 - (void)download:(WMYDownModel *)model progressBlock:(progressBlock)progressBlock stateBlock:(stateBlock)stateBlock{
     
+    WMYDownloadRequest *request = [self getRequestForUrl:model.downUrl];
+    
     if ([self isDownCompletion:model.downUrl]) {
         NSLog(@"下载完成了");
+//        request.downState = WMYStateCompleted;
+//        request.stateBlock(WMYStateCompleted);
+//        [NSFileManager WMYSaveVideoModelWith:request];
         return;
     }
-    
-    WMYDownloadRequest *request = [self getRequestForUrl:model.downUrl];
     
     if (request) {
 
@@ -140,6 +143,7 @@
                     [requestObj.task resume];
                     requestObj.downState = WMYStateStart;
                     requestObj.stateBlock(WMYStateStart);
+                    [NSFileManager WMYSaveVideoModelWith:requestObj];
                     break;
                 }
             }
@@ -155,6 +159,7 @@
                     [requestObj.task suspend];
                     requestObj.downState = WMYStateSuspended;
                     requestObj.stateBlock(WMYStateSuspended);
+                    [NSFileManager WMYSaveVideoModelWith:requestObj];
                     break;
                 }
             }
@@ -162,6 +167,7 @@
             [request.task resume];
             request.downState = WMYStateStart;
             request.stateBlock(WMYStateStart);
+            [NSFileManager WMYSaveVideoModelWith:request];
             NSLog(@"开始下载");
         }
         
@@ -230,7 +236,19 @@
     }
 }
 
-
+#pragma mark 暂停全部请求
+- (void)suspendedAllDownLoad{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (WMYDownloadRequest *requestObj in self.downTasks) {
+            if (requestObj.task.state == NSURLSessionTaskStateRunning) {
+                requestObj.downState = WMYStateSuspended;
+                [requestObj.task suspend];
+                requestObj.stateBlock(WMYStateSuspended);
+                [NSFileManager WMYSaveVideoModelWith:requestObj];
+            }
+        }
+    });
+}
 
 #pragma mark 下载代理方法NSURLSessionDataDelegate
 /**
@@ -297,9 +315,6 @@
     [downloadRequest.stream close];
     downloadRequest.stream = nil;
     
-    // 清除任务
-    [self.downTasks removeObject:downloadRequest];
-    
     for (WMYDownloadRequest *requestObj in self.downTasks) {
         if (requestObj.task.state == NSURLSessionTaskStateSuspended) {
             [requestObj.task resume];
@@ -324,6 +339,9 @@
     }else{
         [NSFileManager WMYSaveVideoModelWith:downloadRequest];
     }
+    
+    // 清除任务
+    [self.downTasks removeObject:downloadRequest];
 }
 
 #pragma mark 初始化
