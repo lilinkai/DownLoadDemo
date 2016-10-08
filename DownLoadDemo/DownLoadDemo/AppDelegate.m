@@ -21,6 +21,8 @@
     [[WMYDownloadManager sharedInstance] startLocalDownTask];
     
     NSArray *videoArray = [NSFileManager WMYGetAllVideonModel];
+    
+    NSString *videLocalPath = [NSFileManager WMYFilePathWithFileName:[NSFileManager WMYfileNamemd5StringWith:@"http://120.25.226.186:32812/resources/videos/minion_01.mp4"]];
     // Override p啊oint for customization after application launch.
     return YES;
 }

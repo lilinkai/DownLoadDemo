@@ -31,5 +31,9 @@
  电影海报
  */
 @property (nonatomic, copy) NSString *movieImgUrl;
+/**
+ 电影信息
+ */
+@property (nonatomic, copy) id contentData;
 
 @end

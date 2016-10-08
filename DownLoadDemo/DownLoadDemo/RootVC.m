@@ -45,6 +45,7 @@
     model1.movieCid = @"111111";
     model1.movieKey = @"222222";
     model1.movieImgUrl = @"uiimageUrl";
+    model1.contentData = @"影片介绍";
     [self.downUrlArray addObject:model1];
     
     WMYDownModel *model2 = [[WMYDownModel alloc]init];
@@ -53,6 +54,7 @@
     model2.movieCid = @"222222";
     model2.movieKey = @"333333";
     model2.movieImgUrl = @"uiimageUrl";
+    model2.contentData = @"影片介绍";
     [self.downUrlArray addObject:model2];
    
     // Do any additional setup after loading the view.

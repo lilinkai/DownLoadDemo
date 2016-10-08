@@ -61,6 +61,7 @@
         model.movieCid = [dic objectForKey:@"movieCid"];
         model.movieKey = [dic objectForKey:@"movieKey"];
         model.movieImgUrl = [dic objectForKey:@"movieImgUrl"];
+        model.contentData = [dic objectForKey:@"contentData"];
         
         if ([[dic objectForKey:@"state"] integerValue] == WMYStateStart || [[dic objectForKey:@"state"] integerValue] == WMYStateSuspended) {
             [[WMYDownloadManager sharedInstance] download:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {

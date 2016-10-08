@@ -124,6 +124,7 @@
                 [dic setObject:[dic objectForKey:@"movieCid"] forKey:@"movieCid"];
                 [dic setObject:[dic objectForKey:@"movieKey"] forKey:@"movieKey"];
                 [dic setObject:[dic objectForKey:@"movieImgUrl"] forKey:@"movieImgUrl"];
+                [dic setObject:[dic objectForKey:@"contentData"] forKey:@"contentData"];
                 [dic setObject:[NSNumber numberWithLongLong:request.totalLength] forKey:@"totalLength"];
                 [dic setObject:[NSNumber numberWithInteger:request.downState] forKey:@"state"];
                 [dic setObject:[NSNumber numberWithInteger:[[dic objectForKey:@"index"] integerValue]] forKey:@"index"];
@@ -142,6 +143,7 @@
                                        @"movieCid": request.downModel.movieCid,
                                        @"movieKey": request.downModel.movieKey,
                                        @"movieImgUrl": request.downModel.movieImgUrl,
+                                       @"contentData": request.downModel.contentData,
                                        @"totalLength": [NSNumber numberWithLongLong:request.totalLength],
                                        @"state": [NSNumber numberWithInteger:request.downState],
                                        @"index": [NSNumber numberWithInteger:infolist.count]
