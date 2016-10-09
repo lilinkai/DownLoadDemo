@@ -106,14 +106,14 @@
  */
 -(NSString *)convertSize:(NSUInteger)length
 {
-    if(length<1024)
+    if(length<1000)
         return [NSString stringWithFormat:@"%ldB",(NSUInteger)length];
-    else if(length>=1024&&length<1024*1024)
-        return [NSString stringWithFormat:@"%.0fK",(float)length/1024];
-    else if(length >=1024*1024&&length<1024*1024*1024)
-        return [NSString stringWithFormat:@"%.1fM",(float)length/(1024*1024)];
+    else if(length>=1000&&length<1000*1000)
+        return [NSString stringWithFormat:@"%.0fK",(float)length/1000];
+    else if(length >=1000*1000&&length<1000*1000*1000)
+        return [NSString stringWithFormat:@"%.1fM",(float)length/(1000*1000)];
     else
-        return [NSString stringWithFormat:@"%.1fG",(float)length/(1024*1024*1024)];
+        return [NSString stringWithFormat:@"%.1fG",(float)length/(1000*1000*1000)];
 }
 
 /**
@@ -129,6 +129,27 @@
     
     if ([self isDownCompletion:model.downUrl]) {
         NSLog(@"下载完成了");
+        
+        
+        NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
+        
+        for (NSDictionary *dic in infolist) {
+            
+            WMYDownModel *model = [[WMYDownModel alloc]init];
+            model.downUrl = [dic objectForKey:@"downUrl"];
+            model.videoName = [dic objectForKey:@"videoName"];
+            model.movieCid = [dic objectForKey:@"movieCid"];
+            model.movieKey = [dic objectForKey:@"movieKey"];
+            model.movieImgUrl = [dic objectForKey:@"movieImgUrl"];
+            model.contentData = [dic objectForKey:@"contentData"];
+            
+            
+            
+            NSLog(@"电影总大小是=======%@", [dic objectForKey:@"totalLength"]);
+            
+            NSLog(@"dicdic ======= %@", [self convertSize:[[dic objectForKey:@"totalLength"] integerValue]]);
+        }
+        
 //        request.downState = WMYStateCompleted;
 //        request.stateBlock(WMYStateCompleted);
 //        [NSFileManager WMYSaveVideoModelWith:request];
