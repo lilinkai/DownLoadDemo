@@ -192,7 +192,7 @@
     NSMutableArray *completedVideoArray = [NSMutableArray array];
     
     for (NSMutableDictionary *dic in infolist) {
-        if ([[dic objectForKey:@"state"] integerValue] == 2) {
+        if ([[dic objectForKey:@"state"] integerValue] == 3) {
             [completedVideoArray addObject:dic];
         }
     }

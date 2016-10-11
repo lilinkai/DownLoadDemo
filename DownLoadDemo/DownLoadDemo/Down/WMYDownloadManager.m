@@ -315,12 +315,6 @@
     
     WMYDownloadRequest *downloadRequest = [self getDownloadRequest:task.taskDescription];
     
-    if (downloadRequest.downState == WMYStateCancel) {
-        [NSFileManager WMYDelVideoModelWith:downloadRequest.downModel.downUrl];
-    }else{
-        [NSFileManager WMYSaveVideoModelWith:downloadRequest];
-    }
-    
     // 清除任务
     [self.downTasks removeObject:downloadRequest];
     
@@ -345,6 +339,12 @@
         // 下载失败
         downloadRequest.downState = WMYStateFailed;
         downloadRequest.stateBlock(WMYStateFailed);
+    }
+    
+    if (downloadRequest.downState == WMYStateCancel) {
+        [NSFileManager WMYDelVideoModelWith:downloadRequest.downModel.downUrl];
+    }else{
+        [NSFileManager WMYSaveVideoModelWith:downloadRequest];
     }
 }
 
