@@ -14,7 +14,7 @@
 
 @interface WMYDownloadManager ()<NSURLSessionDelegate>
 {
-    
+    getCurrentDownVideoInfoBlock _getCurrentDownVideoInfoBlock;
 }
 
 @property (strong, nonatomic) NSURLSession *session;
@@ -63,7 +63,7 @@
         model.movieImgUrl = [dic objectForKey:@"movieImgUrl"];
         model.contentData = [dic objectForKey:@"contentData"];
         
-        if ([[dic objectForKey:@"state"] integerValue] == WMYStateStart || [[dic objectForKey:@"state"] integerValue] == WMYStateSuspended) {
+        if ([[dic objectForKey:@"state"] integerValue] == WMYStateStart || [[dic objectForKey:@"state"] integerValue] == WMYStateSuspended || [[dic objectForKey:@"state"] integerValue] == WMYStateWait) {
             [[WMYDownloadManager sharedInstance] download:model progressBlock:^(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed) {
                 
             } stateBlock:^(WMYDownloadState state) {
@@ -129,6 +129,7 @@
     
     if ([self isDownCompletion:model.downUrl]) {
         NSLog(@"下载完成了");
+        return;
     }
     
     if (request) {
@@ -208,7 +209,9 @@
         
         [NSFileManager WMYSaveVideoModelWith:request];
         //未存在添加到下载队列数组中
-        [self.downTasks insertObject:request atIndex:0];
+        [self.downTasks addObject:request];
+        
+        NSLog(@"添加下载了");
     }
 }
 
@@ -234,16 +237,18 @@
 
 #pragma mark 暂停全部请求
 - (void)suspendedAllDownLoad{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        for (WMYDownloadRequest *requestObj in self.downTasks) {
-            if (requestObj.task.state == NSURLSessionTaskStateRunning) {
-                requestObj.downState = WMYStateSuspended;
-                [requestObj.task suspend];
-                requestObj.stateBlock(WMYStateSuspended);
-                [NSFileManager WMYSaveVideoModelWith:requestObj];
-            }
+    for (WMYDownloadRequest *requestObj in self.downTasks) {
+        if (requestObj.task.state == NSURLSessionTaskStateSuspended) {
+            requestObj.downState = WMYStateSuspended;
+            requestObj.stateBlock(WMYStateSuspended);
+            [NSFileManager WMYSaveVideoModelWith:requestObj];
+        }else if (requestObj.task.state == NSURLSessionTaskStateRunning){
+            requestObj.downState = WMYStateSuspended;
+            requestObj.stateBlock(WMYStateSuspended);
+            [requestObj.task suspend];
+            [NSFileManager WMYSaveVideoModelWith:requestObj];
         }
-    });
+    }
 }
 
 #pragma mark  开始全部请求
@@ -251,7 +256,34 @@
  开始全部请求
  */
 - (void)startAllDownLoad{
-    
+    if (self.downTasks.count > 0) {
+        for (WMYDownloadRequest *requestObj in self.downTasks) {
+            if (requestObj.task.state == NSURLSessionTaskStateRunning) {
+                requestObj.downState = WMYStateWait;
+                [requestObj.task suspend];
+                requestObj.stateBlock(WMYStateWait);
+                [NSFileManager WMYSaveVideoModelWith:requestObj];
+            }else if(requestObj.task.state == NSURLSessionTaskStateSuspended){
+                requestObj.downState = WMYStateWait;
+                requestObj.stateBlock(WMYStateWait);
+                [NSFileManager WMYSaveVideoModelWith:requestObj];
+            }
+        }
+        WMYDownloadRequest *requestObj = self.downTasks[0];
+        requestObj.downState = WMYStateStart;
+        [requestObj.task resume];
+        requestObj.stateBlock(WMYStateStart);
+        [NSFileManager WMYSaveVideoModelWith:requestObj];
+    }
+}
+
+/**
+ 获取当前正在下载的电影信息
+ 
+ @param getCurrentDownVideoInfoBlock 电影信息回调
+ */
+- (void)getCurrentDownVideoInfo:(getCurrentDownVideoInfoBlock)getCurrentDownVideoInfoBlock{
+    _getCurrentDownVideoInfoBlock = getCurrentDownVideoInfoBlock;
 }
 
 #pragma mark 下载代理方法NSURLSessionDataDelegate
@@ -304,6 +336,15 @@
     speedString=[NSString stringWithFormat:@"%@/s",growString];
 
     downloadRequest.progressBlock([self convertSize:receivedSize], [self convertSize:expectedSize], progress, speedString);
+    
+    NSDictionary *videoInfo = @{@"progress": [NSString stringWithFormat:@"%f", progress],
+                                @"videoName": [NSString stringWithFormat:@"%@", downloadRequest.downModel.videoName],
+                                @"expectedSize": [self convertSize:expectedSize],
+                                @"speedString": speedString};
+    
+    if (_getCurrentDownVideoInfoBlock) {
+         _getCurrentDownVideoInfoBlock(videoInfo);
+    }
 }
 
 /**
@@ -322,12 +363,23 @@
     [downloadRequest.stream close];
     downloadRequest.stream = nil;
     
+    BOOL isDown = NO;
+    
     for (WMYDownloadRequest *requestObj in self.downTasks) {
-        if (requestObj.task.state == NSURLSessionTaskStateSuspended && requestObj.downState == WMYStateWait) {
-            [requestObj.task resume];
-            requestObj.downState = WMYStateStart;
-            requestObj.stateBlock(WMYStateStart);
+        if (requestObj.task.state == NSURLSessionTaskStateRunning) {
+            isDown = YES;
             break;
+        }
+    }
+    
+    for (WMYDownloadRequest *requestObj in self.downTasks) {
+        if (isDown == NO) {
+            if (requestObj.task.state == NSURLSessionTaskStateSuspended && requestObj.downState == WMYStateWait) {
+                [requestObj.task resume];
+                requestObj.downState = WMYStateStart;
+                requestObj.stateBlock(WMYStateStart);
+                break;
+            }
         }
     }
     

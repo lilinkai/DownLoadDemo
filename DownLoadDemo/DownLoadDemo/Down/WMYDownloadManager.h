@@ -12,6 +12,8 @@
 
 typedef void(^progressBlock)(NSString *receivedSize, NSString *expectedSize, float progress, NSString *speed);
 
+typedef void(^getCurrentDownVideoInfoBlock)(NSDictionary *videoInfo);
+
 typedef void(^stateBlock)(WMYDownloadState state);
 
 @interface WMYDownloadManager : NSObject
@@ -69,5 +71,12 @@ typedef void(^stateBlock)(WMYDownloadState state);
  开始全部请求
  */
 - (void)startAllDownLoad;
+
+/**
+ 获取当前正在下载的电影信息
+
+ @param getCurrentDownVideoInfoBlock 电影信息回调
+ */
+- (void)getCurrentDownVideoInfo:(getCurrentDownVideoInfoBlock)getCurrentDownVideoInfoBlock;
 
 @end

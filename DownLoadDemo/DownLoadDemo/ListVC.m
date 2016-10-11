@@ -33,14 +33,25 @@
     _listArr = [WMYDownloadManager sharedInstance].downTasks;
    
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(doneDownLoad)];
-    self.navigationItem.rightBarButtonItem = item;
+    
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(startDownLoad)];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:item,item1, nil];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [[WMYDownloadManager sharedInstance] getCurrentDownVideoInfo:^(NSDictionary *videoInfo) {
+        NSLog(@"videoInfovideoInfo ===== %@", videoInfo);
+    }];
     // Do any additional setup after loading the view.
 }
 
 - (void)doneDownLoad{
     [[WMYDownloadManager sharedInstance] suspendedAllDownLoad];
+}
+
+- (void)startDownLoad{
+    [[WMYDownloadManager sharedInstance] startAllDownLoad];
 }
 
 - (WMYDownloadManager *)downloadManager
