@@ -38,9 +38,17 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.downUrlArray = [NSMutableArray array];
+    /*
+     http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTOOLBOXMURDER2.mp4
+     http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTheCursed.mp4
+     http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PACTORSWANTED.mp4
+     http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PAtPrestonCastle.mp4
+     http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTheSpeak.mp4
+     http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTheSacred.mp4
+     */
     
     WMYDownModel *model1 = [[WMYDownModel alloc]init];
-    model1.downUrl = @"http://120.25.226.186:32812/resources/videos/minion_01.mp4";
+    model1.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTOOLBOXMURDER2.mp4";
     model1.videoName = @"魔兽世界预告片";
     model1.movieCid = @"111111";
     model1.movieKey = @"222222";
@@ -49,13 +57,31 @@
     [self.downUrlArray addObject:model1];
     
     WMYDownModel *model2 = [[WMYDownModel alloc]init];
-    model2.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTOOLBOXMURDER2.mp4";
-    model2.videoName = @"南瓜电影预告片";
+    model2.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTheCursed.mp4";
+    model2.videoName = @"预告片2222222";
     model2.movieCid = @"222222";
     model2.movieKey = @"333333";
     model2.movieImgUrl = @"uiimageUrl";
     model2.contentData = @"影片介绍";
     [self.downUrlArray addObject:model2];
+    
+    WMYDownModel *model3 = [[WMYDownModel alloc]init];
+    model3.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PACTORSWANTED.mp4";
+    model3.videoName = @"预告片3333333";
+    model3.movieCid = @"222222";
+    model3.movieKey = @"333333";
+    model3.movieImgUrl = @"uiimageUrl";
+    model3.contentData = @"影片介绍";
+    [self.downUrlArray addObject:model3];
+    
+    WMYDownModel *model4 = [[WMYDownModel alloc]init];
+    model4.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PAtPrestonCastle.mp4";
+    model4.videoName = @"预告片44444444";
+    model4.movieCid = @"222222";
+    model4.movieKey = @"333333";
+    model4.movieImgUrl = @"uiimageUrl";
+    model4.contentData = @"影片介绍";
+    [self.downUrlArray addObject:model4];
    
     // Do any additional setup after loading the view.
 }

@@ -65,6 +65,9 @@ typedef void(^stateBlock)(WMYDownloadState state);
  */
 - (void)suspendedAllDownLoad;
 
-
+/**
+ 开始全部请求
+ */
+- (void)startAllDownLoad;
 
 @end

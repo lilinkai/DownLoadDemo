@@ -101,6 +101,10 @@
             [cell.pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
             cell.downState.text = @"下载中";
             break;
+        case WMYStateWait:
+            [cell.pauseButton setTitle:@"开始下载" forState:UIControlStateNormal];
+            cell.downState.text = @"等待下载";
+            break;
         case WMYStateSuspended:
             [cell.pauseButton setTitle:@"开始下载" forState:UIControlStateNormal];
             cell.downState.text = @"暂停";
@@ -177,6 +181,10 @@
             case WMYStateSuspended:
                 [cell.pauseButton setTitle:@"开始下载" forState:UIControlStateNormal];
                 cell.downState.text = @"暂停";
+                break;
+            case WMYStateWait:
+                [cell.pauseButton setTitle:@"开始下载" forState:UIControlStateNormal];
+                cell.downState.text = @"等待下载";
                 break;
             case WMYStateCompleted:
                 [cell.pauseButton setTitle:@"删除" forState:UIControlStateNormal];

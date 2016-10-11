@@ -26,6 +26,9 @@
         case WMYStateStart:
             self.stateLabel.text = @"下载中";
             break;
+        case WMYStateWait:
+            self.stateLabel.text = @"等待中";
+            break;
         case WMYStateSuspended:
             self.stateLabel.text = @"暂停";
             break;

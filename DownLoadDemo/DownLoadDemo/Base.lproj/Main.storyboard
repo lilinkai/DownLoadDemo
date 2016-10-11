@@ -38,10 +38,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" id="zoZ-79-E5N">
-                                        <rect key="frame" x="0.0" y="92" width="1000" height="40"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zoZ-79-E5N" id="zQD-wo-do3">
-                                            <frame key="frameInset" width="1000" height="39"/>
+                                            <frame key="frameInset" width="375" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -89,7 +89,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f6n-mb-uiV" id="p4t-EE-pQg">
-                                            <frame key="frameInset" width="375" height="129"/>
+                                            <frame key="frameInset" width="375" height="129.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_startup.png" translatesAutoresizingMaskIntoConstraints="NO" id="TZc-cn-E0A" customClass="login_startup">
@@ -132,10 +132,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-dJ-5oD">
-                                                    <frame key="frameInset" minX="18" minY="17" width="66" height="30"/>
+                                                    <frame key="frameInset" minX="8" minY="17" width="90" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <state key="normal" title="暂停">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>

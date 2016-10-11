@@ -152,10 +152,6 @@
             
             [infolist writeToFile:[NSFileManager WMYDownListPlistFilePath] atomically:YES];
         }
-
-        NSMutableArray *infolist111= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
-        NSLog(@"infolist111 ==== %@", infolist111);
-        
     });
 }
 

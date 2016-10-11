@@ -129,43 +129,19 @@
     
     if ([self isDownCompletion:model.downUrl]) {
         NSLog(@"下载完成了");
-        
-        
-        NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
-        
-        for (NSDictionary *dic in infolist) {
-            
-            WMYDownModel *model = [[WMYDownModel alloc]init];
-            model.downUrl = [dic objectForKey:@"downUrl"];
-            model.videoName = [dic objectForKey:@"videoName"];
-            model.movieCid = [dic objectForKey:@"movieCid"];
-            model.movieKey = [dic objectForKey:@"movieKey"];
-            model.movieImgUrl = [dic objectForKey:@"movieImgUrl"];
-            model.contentData = [dic objectForKey:@"contentData"];
-            
-            
-            
-            NSLog(@"电影总大小是=======%@", [dic objectForKey:@"totalLength"]);
-            
-            NSLog(@"dicdic ======= %@", [self convertSize:[[dic objectForKey:@"totalLength"] integerValue]]);
-        }
-        
-//        request.downState = WMYStateCompleted;
-//        request.stateBlock(WMYStateCompleted);
-//        [NSFileManager WMYSaveVideoModelWith:request];
-        return;
     }
     
     if (request) {
 
         if (request.task.state == NSURLSessionTaskStateRunning) {
             for (WMYDownloadRequest *requestObj in self.downTasks) {
-                if (requestObj.task.state == NSURLSessionTaskStateSuspended) {
+                if (requestObj.task.state == NSURLSessionTaskStateSuspended && requestObj.downState == WMYStateWait) {
                     [requestObj.task resume];
                     requestObj.downState = WMYStateStart;
                     requestObj.stateBlock(WMYStateStart);
                     [NSFileManager WMYSaveVideoModelWith:requestObj];
                     break;
+                    //这里现在队列为1所以查到一个就返回，队列为N的时候需要计算
                 }
             }
             
@@ -178,8 +154,8 @@
             for (WMYDownloadRequest *requestObj in self.downTasks) {
                 if (requestObj.task.state == NSURLSessionTaskStateRunning) {
                     [requestObj.task suspend];
-                    requestObj.downState = WMYStateSuspended;
-                    requestObj.stateBlock(WMYStateSuspended);
+                    requestObj.downState = WMYStateWait;
+                    requestObj.stateBlock(WMYStateWait);
                     [NSFileManager WMYSaveVideoModelWith:requestObj];
                     break;
                 }
@@ -212,11 +188,6 @@
         request.task = task;
         request.task.taskDescription = [NSFileManager WMYfileNamemd5StringWith:request.downModel.downUrl];
         
-        //未存在添加到下载队列数组中
-        [self.downTasks addObject:request];
-        
-        [NSFileManager WMYSaveVideoModelWith:request];
-        
         NSInteger count = 0;
         
         for (WMYDownloadRequest *requestObj in self.downTasks) {
@@ -226,14 +197,18 @@
         }
         
         if (count >= downLoadCount) {
-            //超出队列限制 暂停状态
-            request.downState = WMYStateSuspended;
-            request.stateBlock(WMYStateSuspended);
+            //超出队列限制 等待状态
+            request.downState = WMYStateWait;
+            request.stateBlock(WMYStateWait);
         }else{
             //开始下载
             request.downState = WMYStateStart;
             [request.task resume];
         }
+        
+        [NSFileManager WMYSaveVideoModelWith:request];
+        //未存在添加到下载队列数组中
+        [self.downTasks insertObject:request atIndex:0];
     }
 }
 
@@ -269,6 +244,14 @@
             }
         }
     });
+}
+
+#pragma mark  开始全部请求
+/**
+ 开始全部请求
+ */
+- (void)startAllDownLoad{
+    
 }
 
 #pragma mark 下载代理方法NSURLSessionDataDelegate
