@@ -315,12 +315,21 @@
     
     WMYDownloadRequest *downloadRequest = [self getDownloadRequest:task.taskDescription];
     
+    if (downloadRequest.downState == WMYStateCancel) {
+        [NSFileManager WMYDelVideoModelWith:downloadRequest.downModel.downUrl];
+    }else{
+        [NSFileManager WMYSaveVideoModelWith:downloadRequest];
+    }
+    
+    // 清除任务
+    [self.downTasks removeObject:downloadRequest];
+    
     // 关闭流
     [downloadRequest.stream close];
     downloadRequest.stream = nil;
     
     for (WMYDownloadRequest *requestObj in self.downTasks) {
-        if (requestObj.task.state == NSURLSessionTaskStateSuspended) {
+        if (requestObj.task.state == NSURLSessionTaskStateSuspended && requestObj.downState == WMYStateWait) {
             [requestObj.task resume];
             requestObj.downState = WMYStateStart;
             requestObj.stateBlock(WMYStateStart);
@@ -337,15 +346,6 @@
         downloadRequest.downState = WMYStateFailed;
         downloadRequest.stateBlock(WMYStateFailed);
     }
-    
-    if (downloadRequest.downState == WMYStateCancel) {
-        [NSFileManager WMYDelVideoModelWith:downloadRequest.downModel.downUrl];
-    }else{
-        [NSFileManager WMYSaveVideoModelWith:downloadRequest];
-    }
-    
-    // 清除任务
-    [self.downTasks removeObject:downloadRequest];
 }
 
 #pragma mark 初始化

@@ -91,6 +91,7 @@
     cell.downNameLabel.text = request.downModel.videoName;
     
     cell.pauseButton.tag = indexPath.row;
+    cell.delButton.tag = indexPath.row;
     
     [cell.pauseButton addTarget:self action:@selector(managerButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -112,8 +113,6 @@
         case WMYStateCompleted:
             [cell.pauseButton setTitle:@"删除" forState:UIControlStateNormal];
             cell.downState.text = @"完成";
-            _listArr = [WMYDownloadManager sharedInstance].downTasks;
-            [self.contentTableView reloadData];
             break;
         default:
             break;
