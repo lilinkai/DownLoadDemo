@@ -25,7 +25,7 @@ typedef void(^stateBlock)(WMYDownloadState state);
 @interface WMYDownloadRequest : NSObject
 
 /**
-时间速率
+ 时间速率
  */
 @property (nonatomic, strong)NSTimer *timer;
 

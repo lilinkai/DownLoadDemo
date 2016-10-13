@@ -25,7 +25,7 @@ typedef void(^stateBlock)(WMYDownloadState state);
 
 /**
  下载队列管理单例对象
-
+ 
  @return self
  */
 + (instancetype)sharedInstance;
@@ -38,9 +38,9 @@ typedef void(^stateBlock)(WMYDownloadState state);
 
 /**
  获取对应url下载任务
-
+ 
  @param url 下载url
-
+ 
  @return 请求对象
  */
 - (WMYDownloadRequest *)getRequestForUrl:(NSString *)url;
@@ -48,7 +48,7 @@ typedef void(^stateBlock)(WMYDownloadState state);
 
 /**
  开始下载
-
+ 
  @param model           下载model
  @param progressBlock 下载进度回调
  @param stateBlock    下载状态回调
@@ -57,7 +57,7 @@ typedef void(^stateBlock)(WMYDownloadState state);
 
 /**
  删除对应的下载任务
-
+ 
  @param url 下载url
  */
 - (void)delDownLoadForUrl:(NSString *)url;
@@ -74,7 +74,7 @@ typedef void(^stateBlock)(WMYDownloadState state);
 
 /**
  获取当前正在下载的电影信息
-
+ 
  @param getCurrentDownVideoInfoBlock 电影信息回调
  */
 - (void)getCurrentDownVideoInfo:(getCurrentDownVideoInfoBlock)getCurrentDownVideoInfoBlock;

@@ -36,4 +36,14 @@
  */
 @property (nonatomic, copy) id contentData;
 
+/**
+ 本地下载状态
+ */
+@property (nonatomic, assign) NSInteger downState;
+
+/**
+ 是否为本地存储model
+ */
+@property (nonatomic, assign) NSInteger isLocal;
+
 @end

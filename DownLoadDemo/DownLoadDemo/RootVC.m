@@ -57,7 +57,7 @@
     [self.downUrlArray addObject:model1];
     
     WMYDownModel *model2 = [[WMYDownModel alloc]init];
-    model2.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PTheCursed.mp4";
+    model2.downUrl = @"http://store.vcinema.com.cn/cdn3/Encrypt_mp4/0a917cd08d6db3ecb7d8af308856b3d9_L_E.mp4";
     model2.videoName = @"预告片2222222";
     model2.movieCid = @"222222";
     model2.movieKey = @"333333";
@@ -66,7 +66,7 @@
     [self.downUrlArray addObject:model2];
     
     WMYDownModel *model3 = [[WMYDownModel alloc]init];
-    model3.downUrl = @"http://store.vcinema.com.cn/newKONGBUJI/Trailer/720PACTORSWANTED.mp4";
+    model3.downUrl = @"http://store.vcinema.com.cn/cdn3/Encrypt_mp4/0af7a7ac0b45bbf01f9cb177b1c79b97_L_E.mp4";
     model3.videoName = @"预告片3333333";
     model3.movieCid = @"222222";
     model3.movieKey = @"333333";
