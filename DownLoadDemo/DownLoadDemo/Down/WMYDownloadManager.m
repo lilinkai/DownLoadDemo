@@ -92,7 +92,7 @@
          ]) {
         // 删除沙盒中的资源
         [fileManager removeItemAtPath:[NSFileManager WMYFilePathWithFileName:[NSFileManager WMYfileNamemd5StringWith:url]] error:nil];
-        [NSFileManager WMYDelVideoModelWith:request.downModel.downUrl];
+        [NSFileManager WMYDelVideoModelWith:url];
     }
 }
 
