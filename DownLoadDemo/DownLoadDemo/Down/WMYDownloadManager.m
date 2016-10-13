@@ -444,21 +444,21 @@
         [self.downTasks removeObject:downloadRequest];
         
         [self startAllDownLoad];
-    }
-    
-    //删除下载任务
-    if (downloadRequest.downState == WMYStateCancel) {
-        [self.downTasks removeObject:downloadRequest];
-        [NSFileManager WMYDelVideoModelWith:downloadRequest.downModel.downUrl];
-        // 清除任务
-        
-        downloadRequest.downState = WMYStateCancel;
-        downloadRequest.stateBlock(WMYStateCancel);
-        [self startAllDownLoad];
     }else{
-        //下载失败
-        downloadRequest.downState = WMYStateFailed;
-        downloadRequest.stateBlock(WMYStateFailed);
+        //删除下载任务
+        if (downloadRequest.downState == WMYStateCancel) {
+            [self.downTasks removeObject:downloadRequest];
+            [NSFileManager WMYDelVideoModelWith:downloadRequest.downModel.downUrl];
+            // 清除任务
+            
+            downloadRequest.downState = WMYStateCancel;
+            downloadRequest.stateBlock(WMYStateCancel);
+            [self startAllDownLoad];
+        }else{
+            //下载失败
+            downloadRequest.downState = WMYStateFailed;
+            downloadRequest.stateBlock(WMYStateFailed);
+        }
     }
 }
 
