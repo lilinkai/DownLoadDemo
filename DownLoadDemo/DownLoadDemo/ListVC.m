@@ -41,7 +41,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [[WMYDownloadManager sharedInstance] getCurrentDownVideoInfo:^(NSDictionary *videoInfo) {
-        NSLog(@"videoInfovideoInfo ===== %@", videoInfo);
+        
     }];
     // Do any additional setup after loading the view.
 }
@@ -164,9 +164,7 @@
 }
 
 - (void)updateCellOnMainThread:(NSDictionary *)dic{
-    
-    NSLog(@"更新了");
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         RootCell *cell = [self.contentTableView cellForRowAtIndexPath:[dic objectForKey:@"indexPath"]];
         

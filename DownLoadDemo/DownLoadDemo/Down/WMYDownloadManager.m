@@ -96,7 +96,6 @@
     }
 }
 
-
 #pragma mark 暂停全部请求
 - (void)suspendedAllDownLoad{
     for (WMYDownloadRequest *requestObj in self.downTasks) {
@@ -440,10 +439,9 @@
     if ([self isDownCompletion:downloadRequest.downModel.downUrl]) {
         downloadRequest.downState = WMYStateCompleted;
         downloadRequest.stateBlock(WMYStateCompleted);
-        [NSFileManager WMYSaveVideoModelWith:downloadRequest];
         // 清除任务
         [self.downTasks removeObject:downloadRequest];
-        
+        [NSFileManager WMYSaveVideoModelWith:downloadRequest];
         [self startAllDownLoad];
     }else{
         //删除下载任务

@@ -110,48 +110,46 @@
  @param request 请求
  */
 + (void)WMYSaveVideoModelWith:(WMYDownloadRequest *)request{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
-        
-        BOOL isEqualDic = NO;
-        
-        for (NSMutableDictionary *dic in infolist) {
-            if ([[dic objectForKey:@"downUrl"] isEqualToString:request.downModel.downUrl]) {
-                
-                [dic setObject:[dic objectForKey:@"downUrl"] forKey:@"downUrl"];
-                [dic setObject:[dic objectForKey:@"videoName"] forKey:@"videoName"];
-                [dic setObject:[dic objectForKey:@"movieCid"] forKey:@"movieCid"];
-                [dic setObject:[dic objectForKey:@"movieKey"] forKey:@"movieKey"];
-                [dic setObject:[dic objectForKey:@"movieImgUrl"] forKey:@"movieImgUrl"];
-                [dic setObject:[dic objectForKey:@"contentData"] forKey:@"contentData"];
-                [dic setObject:[NSNumber numberWithLongLong:request.totalLength] forKey:@"totalLength"];
-                [dic setObject:[NSNumber numberWithInteger:request.downState] forKey:@"state"];
-                [dic setObject:[NSNumber numberWithInteger:[[dic objectForKey:@"index"] integerValue]] forKey:@"index"];
-                
-                isEqualDic = YES;
-                NSLog(@"有相同的");
-            }
-        }
-        
-        if (isEqualDic) {
-            [infolist writeToFile:[NSFileManager WMYDownListPlistFilePath] atomically:YES];
-        }else{
-            NSDictionary *modelDic = @{@"downUrl": request.downModel.downUrl,
-                                       @"videoName": request.downModel.videoName,
-                                       @"movieCid": request.downModel.movieCid,
-                                       @"movieKey": request.downModel.movieKey,
-                                       @"movieImgUrl": request.downModel.movieImgUrl,
-                                       @"contentData": request.downModel.contentData,
-                                       @"totalLength": [NSNumber numberWithLongLong:request.totalLength],
-                                       @"state": [NSNumber numberWithInteger:request.downState],
-                                       @"index": [NSNumber numberWithInteger:infolist.count]
-                                       };
+    NSMutableArray *infolist= [[NSMutableArray alloc]initWithContentsOfFile:[NSFileManager WMYDownListPlistFilePath]];
+    
+    BOOL isEqualDic = NO;
+    
+    for (NSMutableDictionary *dic in infolist) {
+        if ([[dic objectForKey:@"downUrl"] isEqualToString:request.downModel.downUrl]) {
             
-            [infolist addObject:modelDic];
+            [dic setObject:[dic objectForKey:@"downUrl"] forKey:@"downUrl"];
+            [dic setObject:[dic objectForKey:@"videoName"] forKey:@"videoName"];
+            [dic setObject:[dic objectForKey:@"movieCid"] forKey:@"movieCid"];
+            [dic setObject:[dic objectForKey:@"movieKey"] forKey:@"movieKey"];
+            [dic setObject:[dic objectForKey:@"movieImgUrl"] forKey:@"movieImgUrl"];
+            [dic setObject:[dic objectForKey:@"contentData"] forKey:@"contentData"];
+            [dic setObject:[NSNumber numberWithLongLong:request.totalLength] forKey:@"totalLength"];
+            [dic setObject:[NSNumber numberWithInteger:request.downState] forKey:@"state"];
+            [dic setObject:[NSNumber numberWithInteger:[[dic objectForKey:@"index"] integerValue]] forKey:@"index"];
             
-            [infolist writeToFile:[NSFileManager WMYDownListPlistFilePath] atomically:YES];
+            isEqualDic = YES;
+            NSLog(@"有相同的");
         }
-    });
+    }
+    
+    if (isEqualDic) {
+        [infolist writeToFile:[NSFileManager WMYDownListPlistFilePath] atomically:YES];
+    }else{
+        NSDictionary *modelDic = @{@"downUrl": request.downModel.downUrl,
+                                   @"videoName": request.downModel.videoName,
+                                   @"movieCid": request.downModel.movieCid,
+                                   @"movieKey": request.downModel.movieKey,
+                                   @"movieImgUrl": request.downModel.movieImgUrl,
+                                   @"contentData": request.downModel.contentData,
+                                   @"totalLength": [NSNumber numberWithLongLong:request.totalLength],
+                                   @"state": [NSNumber numberWithInteger:request.downState],
+                                   @"index": [NSNumber numberWithInteger:infolist.count]
+                                   };
+        
+        [infolist addObject:modelDic];
+        
+        [infolist writeToFile:[NSFileManager WMYDownListPlistFilePath] atomically:YES];
+    }
 }
 
 #pragma mark --获取对应url的电影信息
